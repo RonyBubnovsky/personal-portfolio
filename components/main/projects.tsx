@@ -4,14 +4,14 @@ import { PROJECTS } from "@/constants";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { FaGithub, FaExternalLinkAlt } from "react-icons/fa";
-import Image from "next/image";
+import ProjectImageCarousel from "../sub/ProjectImageCarousel";
 
 interface Project {
   title: string;
   description: string;
   technologies: string[];
   duration: string;
-  image: string;
+  images: string[];
   link: string;
   github: string | { client: string; server: string };
 }
@@ -53,7 +53,7 @@ const ProjectsSection = () => {
             >
               <div className="w-full lg:w-1/2">
                 <div className="relative overflow-hidden rounded-lg aspect-video bg-gray-700 shadow-xl group">
-                  <div className="absolute inset-0 bg-blue-600/10 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity z-10">
+                  <div className="absolute inset-0 bg-blue-600/10 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity z-20">
                     <div className="flex gap-4">
                       {project.github && (
                         typeof project.github === 'object' ? (
@@ -100,13 +100,7 @@ const ProjectsSection = () => {
                       )}
                     </div>
                   </div>
-                  <Image
-                    src={project.image}
-                    alt={project.title}
-                    fill
-                    className="object-cover"
-                    sizes="(max-width: 768px) 100vw, 50vw"
-                  />
+                  <ProjectImageCarousel images={project.images} title={project.title} />
                 </div>
               </div>
 

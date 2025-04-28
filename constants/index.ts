@@ -48,7 +48,12 @@ export const PROJECTS = [
     description: "A full-stack social platform for travelers to share experiences and connect. Built with React, Node.js (Express), and MongoDB. Features secure authentication, token management, and Firebase for image storage.",
     technologies: ["React", "Node.js", "Express", "MongoDB", "Firebase", "CircleCI", "Cypress"],
     duration: "July 2024 – August 2024",
-    image: "/projects/tiktour.png",
+    images: [
+      "/projects/tiktour.png",
+      "/projects/tiktour1.png",
+      "/projects/tiktour2.png",
+      "/projects/tiktour3.png"
+    ],
     link: "#",
     github: {
       client: "https://github.com/RonyBubnovsky/tiktour-client",
@@ -60,7 +65,7 @@ export const PROJECTS = [
     description: "Full-stack job search platform using React, Node.js (Express), and Tailwind CSS. Features weighted job matching algorithm and Google Generative API for AI-driven CV analysis and job recommendations.",
     technologies: ["React", "Node.js", "Express", "Tailwind CSS", "Cloudinary", "GitHub Actions", "Google Generative API"],
     duration: "October 2024 – Present",
-    image: "/projects/career-agent.jpg",
+    images: ["/projects/career-agent.jpg"],
     link: "#",
     github: "https://github.com/RonyBubnovsky"
   },
@@ -69,7 +74,7 @@ export const PROJECTS = [
     description: "Full-stack task management system using React and Flask (Python) following microservices architecture. Containerized with Docker and orchestrated with Docker Compose.",
     technologies: ["React", "Python", "Flask", "Docker", "Cypress", "Pytest", "Microservices"],
     duration: "January 2025",
-    image: "/projects/task-management.jpg",
+    images: ["/projects/task-management.jpg"],
     link: "#",
     github: "https://github.com/RonyBubnovsky"
   },
@@ -78,7 +83,7 @@ export const PROJECTS = [
     description: "Full-stack chess application with real-time gameplay and AI opponent using the minimax algorithm with alpha-beta pruning. Features Clerk authentication and Redis for user statistics.",
     technologies: ["Next.js", "TypeScript", "Tailwind CSS", "Redis", "Clerk", "Render"],
     duration: "March 2025",
-    image: "/projects/chess-app.jpg",
+    images: ["/projects/chess-app.jpg"],
     link: "#",
     github: "https://github.com/RonyBubnovsky"
   }
