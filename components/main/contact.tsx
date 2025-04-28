@@ -24,7 +24,6 @@ const ContactSection = () => {
     threshold: 0.1,
   });
 
-  const [hoveredCard, setHoveredCard] = useState<number | null>(null);
   const [copied, setCopied] = useState(false);
 
   const handleCopyEmail = () => {
@@ -122,7 +121,7 @@ const ContactSection = () => {
             <span className="text-blue-400 font-medium">Contact Me</span>
           </div>
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 tracking-tight">
-            Let's Work Together
+            Let&apos;s Work Together
           </h2>
           <p className="text-gray-400 max-w-3xl mx-auto text-lg">
             Feel free to reach out for collaborations, questions, or just to say hello!
@@ -136,7 +135,7 @@ const ContactSection = () => {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-20"
         >
-          {contactInfo.map((item, index) => (
+          {contactInfo.map((item) => (
             <Link 
               href={item.link}
               key={item.id}
@@ -144,8 +143,6 @@ const ContactSection = () => {
               rel={item.id === 'location' ? "noopener noreferrer" : undefined}
             >
               <motion.div
-                onHoverStart={() => setHoveredCard(index)}
-                onHoverEnd={() => setHoveredCard(null)}
                 whileHover={{ y: -10, scale: 1.02 }}
                 transition={{ type: "spring", stiffness: 400, damping: 17 }}
                 className="relative bg-gray-800/50 backdrop-blur-sm rounded-2xl overflow-hidden border border-gray-700/50 h-full shadow-xl hover:shadow-blue-900/20 hover:border-blue-500/30 transition-all duration-300 group"
@@ -277,7 +274,7 @@ const ContactSection = () => {
             </h3>
             
             <p className="text-gray-400 mb-8">
-              I'm always open to discussing new projects, creative ideas or opportunities to be part of your vision.
+              I&apos;m always open to discussing new projects, creative ideas or opportunities to be part of your vision.
             </p>
             
             {/* Social Links with hover effects */}
@@ -323,7 +320,7 @@ const ContactSection = () => {
             >
               <h3 className="text-xl font-bold text-white mb-3">Ready to Start a Project?</h3>
               <p className="text-gray-400 mb-6">
-                Let's work together to bring your ideas to life
+                Let&apos;s work together to bring your ideas to life
               </p>
               <motion.a
                 href={`mailto:${PERSONAL_INFO.email}?subject=Project%20Inquiry`}
