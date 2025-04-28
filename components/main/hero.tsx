@@ -158,7 +158,6 @@ const HeroSection = () => {
                 className="flex flex-wrap gap-2 sm:gap-3 items-center"
                 variants={fadeIn("up", 0.4)}
               >
-                <span className="text-gray-500 text-sm font-inter">Tech Stack:</span>
                 <motion.div 
                   className="flex gap-2 sm:gap-3"
                   variants={{
