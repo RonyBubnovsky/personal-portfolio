@@ -1,7 +1,7 @@
 "use client";
 import { PERSONAL_INFO, SOCIAL_LINKS } from "@/constants";
 import { motion } from "framer-motion";
-import { FaGithub, FaLinkedin, FaReact, FaNodeJs, FaPhoneAlt, FaUser } from "react-icons/fa";
+import { FaGithub, FaLinkedin, FaReact, FaNodeJs, FaUser, FaFileAlt } from "react-icons/fa";
 import { SiJavascript, SiTypescript, SiExpress, SiMongodb, SiTailwindcss } from "react-icons/si";
 import { useState, useEffect } from "react";
 import { textVariant, fadeIn } from "@/lib/motion";
@@ -361,9 +361,15 @@ const HeroSection = () => {
                         }}
                       >
                         <div className="bg-green-500/20 p-1.5 rounded-full flex-shrink-0">
-                          <FaPhoneAlt className="text-green-400 text-xs sm:text-sm" />
+                          <FaFileAlt className="text-green-400 text-xs sm:text-sm" />
                         </div>
-                        <span className="font-medium text-xs sm:text-sm">+972508465858</span>
+                        <a 
+                          href="/cv/Rony_Bubnovsky_CV.pdf" 
+                          download
+                          className="font-medium text-xs sm:text-sm hover:text-green-400 transition-colors"
+                        >
+                          Download my CV
+                        </a>
                       </div>
                     </div>
                   </div>
