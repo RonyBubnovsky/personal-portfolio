@@ -11,7 +11,7 @@ export const PERSONAL_INFO = {
   title: "Junior Full Stack Developer | Software Engineer",
   description: "Junior Full Stack Developer with expertise in JavaScript, React, Node.js, Express.js, and MongoDB, specializing in scalable and secure web applications. Skilled in REST APIs, authentication, and cloud deployment, with hands-on experience in CI/CD pipelines and containerization. Strong problem-solving skills and Agile development experience.",
   email: "rony.bubnovsky@gmail.com",
-  phone: "050-8465858",
+  phone: "+972508465858",
   location: "Ashdod, Israel"
 };
 

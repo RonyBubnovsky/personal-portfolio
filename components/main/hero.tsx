@@ -117,7 +117,24 @@ const HeroSection = () => {
                 variants={textVariant(0.1)}
               >
                 Hi, I&apos;m {PERSONAL_INFO.name} <br className="hidden sm:block" />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-purple-500">Full Stack Developer</span>
+                <motion.div 
+                  className="mt-4 md:mt-6 inline-block relative"
+                  initial={{ y: 10, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ duration: 0.7, delay: 0.3 }}
+                >
+                  <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-500 via-indigo-400 to-blue-600 relative z-10 font-bold">
+                    Full Stack Developer
+                  </span>
+                  
+                  {/* Animated underline */}
+                  <motion.span 
+                    className="absolute -bottom-1 left-0 h-[3px] bg-gradient-to-r from-blue-600 via-indigo-500 to-blue-400 rounded-full"
+                    initial={{ width: "0%" }}
+                    animate={{ width: "100%" }}
+                    transition={{ duration: 1, delay: 0.5 }}
+                  />
+                </motion.div>
               </motion.h1>
               
               <motion.div 
