@@ -100,6 +100,9 @@ const Navbar = () => {
           top: offsetPosition,
           behavior: "smooth"
         });
+        
+        // Update URL hash after scrolling
+        window.history.pushState(null, '', `#${sectionId}`);
       }
     }, 100); // 100ms delay
   };
