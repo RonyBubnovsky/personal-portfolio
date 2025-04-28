@@ -1,34 +1,102 @@
-# Personal Portfolio
+# Rony Bubnovsky | Personal Portfolio
 
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+A modern, responsive personal portfolio website built with Next.js, Framer Motion, and Tailwind CSS. This portfolio showcases my skills, projects, experiences, and contact information in an interactive and visually appealing format.
 
-## Getting Started
+## 🔗 Live Demo
 
-First, run the development server:
+Experience the live site: [ronyportfolio.vercel.app](https://ronyportfolio.vercel.app/)
+
+> **Note:** The live site might differ slightly from the current code as ongoing improvements are being made.
+
+## ✨ Features
+
+- **Modern UI Design** - Sleek, professional interface with attention to detail
+- **Fully Responsive** - Optimized for all devices from mobile to large desktop screens
+- **Interactive Elements** - Smooth animations and transitions using Framer Motion
+- **Dynamic Content** - Content driven by constants for easy updates
+- **Dark Theme** - Professional dark color scheme with accent highlights
+- **Performance Optimized** - Fast loading times with optimized assets
+- **SEO Friendly** - Built with best practices for search engine visibility
+
+## 🛠️ Technologies Used
+
+- **Frontend Framework:** Next.js 15
+- **Language:** TypeScript
+- **Styling:** Tailwind CSS
+- **Animations:** Framer Motion
+- **Icons:** React Icons
+- **Deployment:** Vercel
+- **Version Control:** Git & GitHub
+
+## 📦 Installation
+
+To run this project locally, follow these steps:
+
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/RonyBubnovsky/personal-portfolio.git
+   cd personal-portfolio
+   ```
+
+2. Install dependencies:
+
+   ```bash
+   npm install
+   ```
+
+3. Run the development server:
+
+   ```bash
+   npm run dev
+   ```
+
+4. Open [http://localhost:3000](http://localhost:3000) in your browser.
+
+## 🚀 Building for Production
 
 ```bash
-npm run dev
-# or
-yarn dev
+npm run build
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+To preview the production build locally:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm run start
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 📂 Project Structure
 
-## Learn More
+```
+personal-portfolio/
+├── app/                  # Next.js app directory with routing
+├── components/           # React components
+│   ├── main/             # Main section components
+│   └── sub/              # Supporting components
+├── constants/            # Content data
+├── lib/                  # Utility functions
+├── public/               # Static assets
+│   ├── images/           # Images for the portfolio
+│   └── projects/         # Project screenshots
+└── ...config files       # Various configuration files
+```
 
-To learn more about Next.js, take a look at the following resources:
+## 🔄 Updating Content
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Most of the portfolio content can be updated by editing the files in the `constants/` directory:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- `index.ts` - Contains personal information, skills, projects, experience, and education data
 
-## Deploy on Vercel
+## 📝 License
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 🙏 Acknowledgements
+
+- Icons from [React Icons](https://react-icons.github.io/react-icons/)
+- Animation inspiration from [Framer Motion](https://www.framer.com/motion/)
+- Design inspiration from various modern portfolio websites
+
+---
+
+Designed and developed by Rony Bubnovsky
