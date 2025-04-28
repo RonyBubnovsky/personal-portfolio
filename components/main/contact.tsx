@@ -281,7 +281,7 @@ const ContactSection = () => {
             </p>
             
             {/* Social Links with hover effects */}
-            <div className="grid grid-cols-2 gap-4 mb-10">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-10">
               {socialLinks.map((social, index) => (
                 <motion.a
                   key={social.id}
@@ -292,23 +292,23 @@ const ContactSection = () => {
                   animate={inView ? { opacity: 1, y: 0 } : {}}
                   transition={{ duration: 0.4, delay: 0.6 + (index * 0.1) }}
                   whileHover={{ y: -5, x: 0 }}
-                  className="group flex items-center gap-3 p-4 rounded-xl border border-gray-700/50 bg-gray-800/50 hover:border-blue-500/30 transition-all duration-300"
+                  className="group flex items-center gap-2 p-4 rounded-xl border border-gray-700/50 bg-gray-800/50 hover:border-blue-500/30 transition-all duration-300"
                 >
-                  <div className={`p-3 rounded-full bg-gray-700/50 ${social.bgHover} transition-colors duration-300`}>
+                  <div className={`p-2.5 rounded-full bg-gray-700/50 ${social.bgHover} transition-colors duration-300`}>
                     <span className={`text-gray-300 ${social.color} transition-colors duration-300`}>
                       {social.icon}
                     </span>
                   </div>
-                  <div>
-                    <span className="text-white font-medium block">{social.label}</span>
-                    <span className="text-gray-400 text-sm">Connect</span>
+                  <div className="flex-1 min-w-0">
+                    <span className="text-white font-medium block text-sm sm:text-base truncate">{social.label}</span>
+                    <span className="text-gray-400 text-xs sm:text-sm">Connect</span>
                   </div>
                   <motion.div 
-                    className="ml-auto text-gray-400"
+                    className="text-gray-400 flex-shrink-0"
                     initial={{ x: 0 }}
                     whileHover={{ x: 5 }}
                   >
-                    <HiChevronRight size={20} />
+                    <HiChevronRight size={18} />
                   </motion.div>
                 </motion.a>
               ))}
