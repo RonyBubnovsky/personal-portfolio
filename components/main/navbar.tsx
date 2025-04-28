@@ -5,7 +5,7 @@ import Link from "next/link";
 import { NAV_LINKS } from "@/constants";
 import { cn } from "@/lib/utils";
 import { FiMenu, FiX } from "react-icons/fi";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -50,6 +50,31 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Close menu when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (isMenuOpen && e.target && !(e.target as Element).closest('nav')) {
+        setIsMenuOpen(false);
+      }
+    };
+    
+    document.addEventListener('click', handleClickOutside);
+    return () => document.removeEventListener('click', handleClickOutside);
+  }, [isMenuOpen]);
+
+  // Prevent scrolling when mobile menu is open
+  useEffect(() => {
+    if (isMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [isMenuOpen]);
+
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
@@ -62,14 +87,14 @@ const Navbar = () => {
       className={cn(
         "fixed top-0 left-0 w-full z-50 transition-all duration-300",
         scrolled
-          ? "bg-gray-900/80 backdrop-blur-lg py-3 border-b border-gray-800/50 shadow-lg shadow-blue-900/5"
-          : "bg-transparent py-5"
+          ? "bg-gray-900/80 backdrop-blur-lg py-2 sm:py-3 border-b border-gray-800/50 shadow-lg shadow-blue-900/5"
+          : "bg-transparent py-3 sm:py-5"
       )}
     >
       <div className="container mx-auto px-4 flex justify-between items-center">
         <Link href="#about">
           <motion.span 
-            className="text-white font-bold text-2xl cursor-pointer"
+            className="text-white font-bold text-xl sm:text-2xl cursor-pointer"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
@@ -78,7 +103,7 @@ const Navbar = () => {
         </Link>
 
         {/* Desktop Menu */}
-        <ul className="hidden md:flex space-x-10">
+        <ul className="hidden md:flex space-x-6 lg:space-x-10">
           {NAV_LINKS.map((link, index) => {
             const sectionId = link.path.replace('#', '');
             const isActive = activeSection === sectionId;
@@ -114,6 +139,7 @@ const Navbar = () => {
           whileTap={{ scale: 0.9 }}
           className="md:hidden text-white focus:outline-none bg-gray-800/80 p-2 rounded-lg"
           onClick={toggleMenu}
+          aria-label="Toggle menu"
         >
           {isMenuOpen ? (
             <FiX className="h-5 w-5" />
@@ -124,52 +150,54 @@ const Navbar = () => {
       </div>
 
       {/* Mobile Menu */}
-      {isMenuOpen && (
-        <motion.div
-          initial={{ opacity: 0, height: 0 }}
-          animate={{ opacity: 1, height: "auto" }}
-          exit={{ opacity: 0, height: 0 }}
-          transition={{ duration: 0.3 }}
-          className="md:hidden bg-gray-900/95 backdrop-blur-xl absolute top-full left-0 right-0 border-b border-gray-800/50"
-        >
-          <ul className="flex flex-col py-4 px-6">
-            {NAV_LINKS.map((link, index) => {
-              const sectionId = link.path.replace('#', '');
-              const isActive = activeSection === sectionId;
-              
-              return (
-                <motion.li 
-                  key={index}
-                  initial={{ opacity: 0, x: -10 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: index * 0.05 }}
-                  className="py-3 border-b border-gray-800/30 last:border-0"
-                >
-                  <Link
-                    href={link.path}
-                    className={cn(
-                      "text-gray-300 hover:text-white transition-all duration-300 block",
-                      isActive && "text-white"
-                    )}
-                    onClick={() => setIsMenuOpen(false)}
+      <AnimatePresence>
+        {isMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.3 }}
+            className="md:hidden bg-gray-900/95 backdrop-blur-xl absolute top-full left-0 right-0 border-b border-gray-800/50 max-h-[80vh] overflow-y-auto shadow-xl"
+          >
+            <ul className="flex flex-col py-4 px-6">
+              {NAV_LINKS.map((link, index) => {
+                const sectionId = link.path.replace('#', '');
+                const isActive = activeSection === sectionId;
+                
+                return (
+                  <motion.li 
+                    key={index}
+                    initial={{ opacity: 0, x: -10 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: index * 0.05 }}
+                    className="py-3 border-b border-gray-800/30 last:border-0"
                   >
-                    <span className="relative group">
-                      {link.name}
-                      <span 
-                        className={cn(
-                          "absolute -bottom-1 left-0 h-[2px] bg-blue-500 transition-all duration-300 ease-out rounded-full opacity-0 w-0",
-                          "group-hover:w-full group-hover:opacity-100",
-                          isActive && "w-full opacity-100"
-                        )}
-                      />
-                    </span>
-                  </Link>
-                </motion.li>
-              );
-            })}
-          </ul>
-        </motion.div>
-      )}
+                    <Link
+                      href={link.path}
+                      className={cn(
+                        "text-gray-300 hover:text-white transition-all duration-300 block",
+                        isActive && "text-white"
+                      )}
+                      onClick={() => setIsMenuOpen(false)}
+                    >
+                      <span className="relative group">
+                        {link.name}
+                        <span 
+                          className={cn(
+                            "absolute -bottom-1 left-0 h-[2px] bg-blue-500 transition-all duration-300 ease-out rounded-full opacity-0 w-0",
+                            "group-hover:w-full group-hover:opacity-100",
+                            isActive && "w-full opacity-100"
+                          )}
+                        />
+                      </span>
+                    </Link>
+                  </motion.li>
+                );
+              })}
+            </ul>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </motion.nav>
   );
 };
