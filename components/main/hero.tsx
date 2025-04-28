@@ -1,9 +1,8 @@
 "use client";
 import { PERSONAL_INFO, SOCIAL_LINKS } from "@/constants";
 import { motion } from "framer-motion";
-import { FaGithub, FaLinkedin } from "react-icons/fa";
-import { HiOutlineCode, HiOutlineDatabase } from "react-icons/hi";
-import { RiStackLine } from "react-icons/ri";
+import { FaGithub, FaLinkedin, FaReact, FaNodeJs } from "react-icons/fa";
+import { SiJavascript, SiTypescript, SiExpress, SiMongodb, SiTailwindcss } from "react-icons/si";
 import { useState, useEffect } from "react";
 import { textVariant, fadeIn } from "@/lib/motion";
 import Image from "next/image";
@@ -14,6 +13,7 @@ const roles = ["Full Stack Developer", "Software Engineer", "Problem Solver", "W
 const HeroSection = () => {
   const [currentRoleIndex, setCurrentRoleIndex] = useState(0);
   const [roleHeight, setRoleHeight] = useState(48);
+  const [hoveredIcon, setHoveredIcon] = useState<number | null>(null);
   
   // Update role height based on screen size
   useEffect(() => {
@@ -43,6 +43,16 @@ const HeroSection = () => {
     }, 3000);
     
     return () => clearInterval(interval);
+  }, []);
+
+  // Close tooltip when clicking outside
+  useEffect(() => {
+    const handleClickOutside = () => {
+      setHoveredIcon(null);
+    };
+    
+    document.addEventListener('click', handleClickOutside);
+    return () => document.removeEventListener('click', handleClickOutside);
   }, []);
 
   return (
@@ -162,21 +172,37 @@ const HeroSection = () => {
                   }}
                 >
                   {[
-                    { icon: <HiOutlineCode />, label: "Frontend", color: "blue" },
-                    { icon: <HiOutlineDatabase />, label: "Backend", color: "purple" },
-                    { icon: <RiStackLine />, label: "Full Stack", color: "green" },
+                    { icon: <SiJavascript className="text-yellow-400" />, label: "JavaScript", bgClass: "bg-yellow-900/20 border-yellow-700/30" },
+                    { icon: <SiTypescript className="text-blue-500" />, label: "TypeScript", bgClass: "bg-blue-900/20 border-blue-700/30" },
+                    { icon: <FaReact className="text-cyan-400" />, label: "React", bgClass: "bg-cyan-900/20 border-cyan-700/30" },
+                    { icon: <SiTailwindcss className="text-cyan-500" />, label: "Tailwind CSS", bgClass: "bg-cyan-900/20 border-cyan-700/30" },
+                    { icon: <FaNodeJs className="text-green-500" />, label: "Node.js", bgClass: "bg-green-900/20 border-green-700/30" },
+                    { icon: <SiExpress className="text-gray-200" />, label: "Express.js", bgClass: "bg-gray-800/40 border-gray-700/30" },
+                    { icon: <SiMongodb className="text-green-500" />, label: "MongoDB", bgClass: "bg-green-900/20 border-green-700/30" },
                   ].map((tech, i) => (
-                    <motion.span
-                      key={i}
-                      className={`flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-${tech.color}-900/20 text-${tech.color}-400 border border-${tech.color}-700/30`}
-                      variants={{
-                        hidden: { y: 20, opacity: 0 },
-                        show: { y: 0, opacity: 1 },
-                      }}
-                      whileHover={{ y: -5, scale: 1.1 }}
-                    >
-                      {tech.icon}
-                    </motion.span>
+                    <div key={i} className="relative" style={{ display: 'inline-block' }}>
+                      <motion.div
+                        className={`flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-lg ${tech.bgClass} cursor-pointer overflow-hidden`}
+                        variants={{
+                          hidden: { y: 20, opacity: 0 },
+                          show: { y: 0, opacity: 1 },
+                        }}
+                        whileHover={{ y: -5, scale: 1.1 }}
+                        whileTap={{ scale: 0.95 }}
+                        onHoverStart={() => setHoveredIcon(i)}
+                        onHoverEnd={() => setHoveredIcon(null)}
+                        onTap={() => setHoveredIcon(hoveredIcon === i ? null : i)}
+                      >
+                        <div className="text-lg sm:text-xl">{tech.icon}</div>
+                      </motion.div>
+                      
+                      {hoveredIcon === i && (
+                        <div className="absolute w-auto bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 text-xs font-medium bg-gray-800 text-white rounded-md shadow-lg whitespace-nowrap z-50">
+                          {tech.label}
+                          <div className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-2 h-2 bg-gray-800 rotate-45"></div>
+                        </div>
+                      )}
+                    </div>
                   ))}
                 </motion.div>
               </motion.div>
