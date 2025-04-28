@@ -66,10 +66,10 @@ const SkillsSection = () => {
           ref={ref}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+          <h2 className="text-3xl md:text-4xl font-space-grotesk text-white mb-4">
             Technical Skills
           </h2>
-          <p className="text-gray-400 max-w-3xl mx-auto">
+          <p className="text-gray-400 max-w-3xl mx-auto font-plus-jakarta">
             My technical expertise spans across various technologies and domains, allowing
             me to build comprehensive full-stack applications.
           </p>

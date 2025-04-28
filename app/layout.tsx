@@ -1,34 +1,33 @@
 import '@/app/globals.css';
 import type { Metadata } from 'next';
-import { Inter, Montserrat, Poppins, Playfair_Display } from 'next/font/google';
+import { Outfit, Plus_Jakarta_Sans, Inter, Space_Grotesk } from 'next/font/google';
 
-// Configure the Inter font
+// Configure the Outfit font
+const outfit = Outfit({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-outfit',
+});
+
+// Configure the Plus Jakarta Sans font
+const plusJakarta = Plus_Jakarta_Sans({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-plus-jakarta',
+});
+
+// Configure Space Grotesk for headings
+const spaceGrotesk = Space_Grotesk({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-space-grotesk',
+});
+
+// Configure the Inter font as a fallback
 const inter = Inter({
   subsets: ['latin'],
   display: 'swap',
   variable: '--font-inter',
-});
-
-// Configure the Montserrat font
-const montserrat = Montserrat({
-  subsets: ['latin'],
-  display: 'swap',
-  variable: '--font-montserrat',
-});
-
-// Configure the Poppins font
-const poppins = Poppins({
-  weight: ['400', '500', '600', '700'],
-  subsets: ['latin'],
-  display: 'swap',
-  variable: '--font-poppins',
-});
-
-// Configure the Playfair Display font
-const playfair = Playfair_Display({
-  subsets: ['latin'],
-  display: 'swap',
-  variable: '--font-playfair',
 });
 
 export const metadata: Metadata = {
@@ -42,8 +41,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${inter.variable} ${montserrat.variable} ${poppins.variable} ${playfair.variable}`}>
-      <body className="bg-gray-950 text-white">
+    <html lang="en" className={`${outfit.variable} ${plusJakarta.variable} ${spaceGrotesk.variable} ${inter.variable}`}>
+      <body className="bg-gray-950 text-white font-plus-jakarta">
         {children}
       </body>
     </html>
