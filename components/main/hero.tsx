@@ -296,6 +296,7 @@ const HeroSection = () => {
                   className="w-full h-full rounded-full overflow-hidden flex items-center justify-center border border-gray-700/50 relative group cursor-pointer"
                   onMouseEnter={() => setIsProfileHovered(true)}
                   onMouseLeave={() => setIsProfileHovered(false)}
+                  onClick={() => setIsProfileHovered(!isProfileHovered)}
                 >
                   <Image 
                     src="/images/profileImage.png" 
@@ -306,53 +307,52 @@ const HeroSection = () => {
                     priority
                   />
                   
-                  {/* Modern hover overlay with contact info */}
-                  <motion.div 
-                    className="absolute inset-0 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-20"
+                  {/* Modern hover overlay with contact info - now visible on all devices */}
+                  <div 
+                    className="absolute inset-0 flex flex-col items-center justify-center transition-opacity duration-300 z-20"
+                    style={{ opacity: isProfileHovered ? 1 : 0 }}
                   >
-                    <motion.div
+                    <div
                       className="bg-gray-900/80 backdrop-blur-sm rounded-2xl p-4 w-[80%] border border-blue-500/30 flex flex-col gap-3"
-                      initial={{ scale: 0.8, y: 20 }}
-                      animate={{ 
-                        scale: isProfileHovered ? 1 : 0.8, 
-                        y: isProfileHovered ? 0 : 20 
+                      style={{ 
+                        transform: isProfileHovered ? 'scale(1) translateY(0)' : 'scale(0.8) translateY(20px)',
+                        transition: 'transform 0.3s'
                       }}
-                      transition={{ type: "spring", stiffness: 300, damping: 20 }}
                     >
-                      <motion.div 
+                      <div 
                         className="flex items-center gap-2 text-white"
-                        initial={{ x: -10, opacity: 0 }}
-                        animate={{ 
-                          x: isProfileHovered ? 0 : -10,
-                          opacity: isProfileHovered ? 1 : 0 
+                        style={{ 
+                          transform: isProfileHovered ? 'translateX(0)' : 'translateX(-10px)',
+                          opacity: isProfileHovered ? 1 : 0,
+                          transition: 'transform 0.3s, opacity 0.3s',
+                          transitionDelay: '0.1s'
                         }}
-                        transition={{ delay: 0.1 }}
                       >
                         <div className="bg-blue-500/20 p-1.5 rounded-full flex-shrink-0">
                           <FaUser className="text-blue-400 text-xs sm:text-sm" />
                         </div>
                         <span className="font-medium text-xs sm:text-sm">{PERSONAL_INFO.name}</span>
-                      </motion.div>
+                      </div>
                       
-                      <motion.div 
+                      <div 
                         className="flex items-center gap-2 text-white"
-                        initial={{ x: -10, opacity: 0 }}
-                        animate={{ 
-                          x: isProfileHovered ? 0 : -10,
-                          opacity: isProfileHovered ? 1 : 0 
+                        style={{ 
+                          transform: isProfileHovered ? 'translateX(0)' : 'translateX(-10px)',
+                          opacity: isProfileHovered ? 1 : 0,
+                          transition: 'transform 0.3s, opacity 0.3s',
+                          transitionDelay: '0.2s'
                         }}
-                        transition={{ delay: 0.2 }}
                       >
                         <div className="bg-green-500/20 p-1.5 rounded-full flex-shrink-0">
                           <FaPhoneAlt className="text-green-400 text-xs sm:text-sm" />
                         </div>
                         <span className="font-medium text-xs sm:text-sm">+972508465858</span>
-                      </motion.div>
-                    </motion.div>
-                  </motion.div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
                 
-                {/* Background particles effect on hover */}
+                {/* Background particles effect on hover - visible on all devices */}
                 {isProfileHovered && (
                   <div className="absolute inset-0 -z-5">
                     {[...Array(10)].map((_, i) => (
@@ -383,9 +383,9 @@ const HeroSection = () => {
                   </div>
                 )}
           
-                {/* Floating code snippets - responsive and hidden on smallest screens */}
+                {/* Floating code snippets - now visible on all screen sizes with responsive positioning */}
                 <motion.div 
-                  className="absolute bottom-[-3rem] left-[-5rem] sm:left-[-6rem] md:left-[-8rem] p-2 sm:p-3 bg-gray-800/90 backdrop-blur-sm rounded-lg border border-gray-700/50 shadow-xl w-28 sm:w-32 text-[10px] sm:text-xs font-mono z-20 hidden sm:block"
+                  className="absolute bottom-[-2rem] md:bottom-[-3rem] left-[-3rem] md:left-[-5rem] lg:left-[-6rem] p-2 sm:p-3 bg-gray-800/90 backdrop-blur-sm rounded-lg border border-gray-700/50 shadow-xl w-24 sm:w-28 text-[8px] sm:text-xs font-mono z-20"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 1.2 }}
@@ -396,7 +396,7 @@ const HeroSection = () => {
                 </motion.div>
                 
                 <motion.div 
-                  className="absolute top-[-3rem] left-[-3rem] sm:left-[-4rem] md:left-[-6rem] p-2 sm:p-3 bg-gray-800/90 backdrop-blur-sm rounded-lg border border-gray-700/50 shadow-xl w-24 sm:w-28 text-[10px] sm:text-xs font-mono z-20 hidden sm:block"
+                  className="absolute top-[-2rem] md:top-[-3rem] left-[-2rem] md:left-[-3rem] lg:left-[-4rem] p-2 sm:p-3 bg-gray-800/90 backdrop-blur-sm rounded-lg border border-gray-700/50 shadow-xl w-20 sm:w-24 text-[8px] sm:text-xs font-mono z-20"
                   initial={{ opacity: 0, y: -20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 1.4 }}
@@ -408,7 +408,7 @@ const HeroSection = () => {
 
                 {/* New floating code snippets on right side */}
                 <motion.div 
-                  className="absolute top-[-3rem] right-[-3rem] sm:right-[-4rem] md:right-[-6rem] p-2 sm:p-3 bg-gray-800/90 backdrop-blur-sm rounded-lg border border-gray-700/50 shadow-xl w-28 sm:w-32 text-[10px] sm:text-xs font-mono z-20 hidden sm:block"
+                  className="absolute top-[-2rem] md:top-[-3rem] right-[-2rem] md:right-[-3rem] lg:right-[-4rem] p-2 sm:p-3 bg-gray-800/90 backdrop-blur-sm rounded-lg border border-gray-700/50 shadow-xl w-24 sm:w-28 text-[8px] sm:text-xs font-mono z-20"
                   initial={{ opacity: 0, y: -20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 1.6 }}
@@ -419,7 +419,7 @@ const HeroSection = () => {
                 </motion.div>
                 
                 <motion.div 
-                  className="absolute bottom-[-3rem] right-[-5rem] sm:right-[-6rem] md:right-[-8rem] p-2 sm:p-3 bg-gray-800/90 backdrop-blur-sm rounded-lg border border-gray-700/50 shadow-xl w-32 sm:w-36 text-[10px] sm:text-xs font-mono z-20 hidden sm:block"
+                  className="absolute bottom-[-2rem] md:bottom-[-3rem] right-[-3rem] md:right-[-5rem] lg:right-[-6rem] p-2 sm:p-3 bg-gray-800/90 backdrop-blur-sm rounded-lg border border-gray-700/50 shadow-xl w-28 sm:w-32 text-[8px] sm:text-xs font-mono z-20"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 1.8 }}
