@@ -15,7 +15,7 @@ const SkillsSection = () => {
   return (
     <section 
       id="skills" 
-      className="pt-20 pb-24 bg-gray-900 relative overflow-hidden"
+      className="pt-20 pb-24 bg-gradient-to-b from-gray-950 via-gray-900 to-gray-950 relative overflow-hidden"
     >
       {/* Background gradient elements */}
       <div className="absolute -top-40 -right-40 w-80 h-80 bg-blue-500/10 rounded-full blur-3xl" />

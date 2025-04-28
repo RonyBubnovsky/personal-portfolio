@@ -104,7 +104,7 @@ const ProjectsSection = () => {
   };
 
   return (
-    <section id="projects" className="py-20 bg-gray-800">
+    <section id="projects" className="py-20 bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900 overflow-hidden">
       <div className="container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
