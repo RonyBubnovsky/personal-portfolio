@@ -13,7 +13,10 @@ const SkillsSection = () => {
   });
 
   return (
-    <section id="skills" className="py-20 bg-gray-900 relative overflow-hidden">
+    <section 
+      id="skills" 
+      className="pt-20 pb-24 bg-gray-900 relative overflow-hidden"
+    >
       {/* Background gradient elements */}
       <div className="absolute -top-40 -right-40 w-80 h-80 bg-blue-500/10 rounded-full blur-3xl" />
       <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-purple-500/10 rounded-full blur-3xl" />
@@ -58,15 +61,15 @@ const SkillsSection = () => {
         </div>
       </div>
       
-      <div className="container-wrapper relative z-10">
+      <div className="container mx-auto px-4 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
           ref={ref}
-          className="text-center mb-16"
+          className="text-center mb-10"
         >
-          <h2 className="text-3xl md:text-4xl font-space-grotesk text-white mb-4">
+          <h2 className="text-3xl md:text-4xl font-space-grotesk text-white mb-3">
             Technical Skills
           </h2>
           <p className="text-gray-400 max-w-3xl mx-auto font-plus-jakarta">
@@ -76,7 +79,7 @@ const SkillsSection = () => {
 
           {/* Decorative line */}
           <motion.div 
-            className="h-1 w-20 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto mt-6 rounded-full"
+            className="h-1 w-20 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto mt-4 rounded-full"
             initial={{ width: 0, opacity: 0 }}
             animate={inView ? { width: 80, opacity: 1 } : {}}
             transition={{ duration: 0.8, delay: 0.3 }}
@@ -87,7 +90,7 @@ const SkillsSection = () => {
           variants={staggerContainer(0.1, 0.1)}
           initial="hidden"
           animate={inView ? "show" : "hidden"}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-10"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8"
         >
           {SKILLS.map((skillCategory, index) => (
             <SkillCard
