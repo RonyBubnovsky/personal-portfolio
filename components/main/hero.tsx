@@ -1,9 +1,7 @@
 "use client";
 import { PERSONAL_INFO, SOCIAL_LINKS } from "@/constants";
 import { motion } from "framer-motion";
-import Image from "next/image";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
-import { HiOutlineMail } from "react-icons/hi";
 
 const HeroSection = () => {
   return (
@@ -21,7 +19,7 @@ const HeroSection = () => {
           className="flex-1 text-center md:text-left md:pr-10"
         >
           <h1 className="mb-2 text-4xl font-bold sm:text-5xl md:text-6xl text-white">
-            Hi, I'm <span className="text-blue-500">{PERSONAL_INFO.name}</span>
+            Hi, I&apos;m <span className="text-blue-500">{PERSONAL_INFO.name}</span>
           </h1>
           
           <h2 className="mb-6 text-xl md:text-2xl font-medium text-gray-300">

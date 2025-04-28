@@ -10,7 +10,6 @@ import {
   FaJira,
   FaGitAlt,
   FaDatabase,
-  FaPython,
   FaJava,
 } from "react-icons/fa";
 import { 
@@ -23,8 +22,7 @@ import {
   SiMongodb, 
   SiPostgresql, 
   SiRedis, 
-  SiJest, 
-  SiCypress, 
+  SiJest,
   SiFirebase, 
   SiCircleci, 
   SiCloudinary,
@@ -37,7 +35,6 @@ import {
   SiK6,
   SiApachejmeter,
   SiPostman,
-  SiQase
 } from "react-icons/si";
 import { DiPython } from "react-icons/di";
 import { TbApi, TbBrandCypress } from "react-icons/tb";

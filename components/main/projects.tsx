@@ -25,7 +25,7 @@ const ProjectsSection = () => {
             My Projects
           </h2>
           <p className="text-gray-400 max-w-3xl mx-auto">
-            Here are some of the projects I've worked on. Each project showcases different skills and technologies I've mastered.
+            Here are some of the projects I&apos;ve worked on. Each project showcases different skills and technologies I&apos;ve mastered.
           </p>
         </motion.div>
 
