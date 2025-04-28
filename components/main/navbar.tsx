@@ -35,7 +35,9 @@ const Navbar = () => {
         const element = document.getElementById(section);
         if (element) {
           const rect = element.getBoundingClientRect();
-          if (rect.top <= 150 && rect.bottom >= 150) {
+          // Adjusted threshold to better detect section visibility
+          const threshold = window.innerHeight * 0.3;
+          if (rect.top <= threshold && rect.bottom >= threshold) {
             setActiveSection(section);
             break;
           }
@@ -75,6 +77,24 @@ const Navbar = () => {
     };
   }, [isMenuOpen]);
 
+  // Handle smooth scrolling with offset
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, sectionId: string) => {
+    e.preventDefault();
+    const element = document.getElementById(sectionId);
+    if (element) {
+      const navHeight = 80; // Approximate navbar height
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - navHeight;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth"
+      });
+      
+      setIsMenuOpen(false);
+    }
+  };
+
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
@@ -92,7 +112,7 @@ const Navbar = () => {
       )}
     >
       <div className="container mx-auto px-4 flex justify-between items-center">
-        <Link href="#about">
+        <Link href="#about" onClick={(e) => handleNavClick(e, "about")}>
           <motion.span 
             className="text-white font-bold text-xl sm:text-2xl cursor-pointer"
             whileHover={{ scale: 1.05 }}
@@ -112,6 +132,7 @@ const Navbar = () => {
               <li key={index} className="relative">
                 <Link
                   href={link.path}
+                  onClick={(e) => handleNavClick(e, sectionId)}
                   className={cn(
                     "text-gray-300 font-medium hover:text-white transition-colors duration-300 py-2 px-1",
                     isActive && "text-white"
@@ -174,11 +195,11 @@ const Navbar = () => {
                   >
                     <Link
                       href={link.path}
+                      onClick={(e) => handleNavClick(e, sectionId)}
                       className={cn(
                         "text-gray-300 hover:text-white transition-all duration-300 block",
                         isActive && "text-white"
                       )}
-                      onClick={() => setIsMenuOpen(false)}
                     >
                       <span className="relative group">
                         {link.name}

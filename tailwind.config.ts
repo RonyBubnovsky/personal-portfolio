@@ -47,10 +47,10 @@ const config: Config = {
         },
       },
       fontFamily: {
+        outfit: ['var(--font-outfit)'],
+        'plus-jakarta': ['var(--font-plus-jakarta)'],
+        'space-grotesk': ['var(--font-space-grotesk)'],
         inter: ['var(--font-inter)'],
-        montserrat: ['var(--font-montserrat)'],
-        poppins: ['var(--font-poppins)'],
-        playfair: ['var(--font-playfair)'],
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",

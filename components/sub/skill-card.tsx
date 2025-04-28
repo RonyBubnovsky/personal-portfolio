@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { fadeIn, hoverScale, pulseAnimation } from "@/lib/motion";
+import { fadeIn } from "@/lib/motion";
 import { SkillIcon } from "@/lib/skill-icons";
 import { getCategoryIcon } from "@/constants/skill-icons";
 import Tooltip from "./tooltip";
@@ -13,67 +13,129 @@ interface SkillCardProps {
 }
 
 const SkillCard = ({ title, technologies, index }: SkillCardProps) => {
-  // Get the category icon component
   const CategoryIcon = getCategoryIcon(title);
   
   return (
     <motion.div
       variants={fadeIn("up", index * 0.1)}
-      className="glass-effect rounded-xl p-6 shadow-xl backdrop-blur-sm border border-gray-700/50 hover:border-blue-500/30 transition-all duration-300 group relative"
+      className="glass-effect rounded-2xl p-6 shadow-2xl backdrop-blur-md border border-gray-700/50 
+                 hover:border-blue-500/50 transition-all duration-500 group relative
+                 hover:bg-gradient-to-br from-gray-900/80 to-gray-800/80
+                 hover:shadow-[0_0_30px_rgba(59,130,246,0.3)]"
+      whileHover={{
+        y: -5,
+        transition: { duration: 0.3, ease: "easeOut" }
+      }}
     >
-      {/* Category icon at the top */}
-      <div className="absolute -top-5 left-1/2 transform -translate-x-1/2">
+      {/* Animated background gradient */}
+      <motion.div 
+        className="absolute inset-0 rounded-2xl bg-gradient-to-r from-blue-500/10 via-purple-500/10 to-pink-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+        animate={{
+          backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
+        }}
+        transition={{
+          duration: 10,
+          repeat: Infinity,
+          ease: "linear"
+        }}
+      />
+
+      {/* Category icon with enhanced animations */}
+      <div className="absolute -top-6 left-1/2 transform -translate-x-1/2">
         <motion.div 
-          className="w-10 h-10 rounded-full bg-gray-800 border border-gray-700 flex items-center justify-center shadow-lg"
+          className="w-12 h-12 rounded-xl bg-gray-800/90 border border-gray-700 flex items-center justify-center shadow-lg
+                     backdrop-blur-sm group-hover:border-blue-500/50"
           initial={{ y: -10, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ delay: index * 0.1 + 0.3 }}
           whileHover={{ 
-            y: -3, 
-            boxShadow: "0 0 20px rgba(59, 130, 246, 0.5)",
+            scale: 1.1,
+            rotate: [0, 5, -5, 0],
+            boxShadow: "0 0 30px rgba(59, 130, 246, 0.4)",
             borderColor: "rgba(59, 130, 246, 0.8)"
           }}
         >
-          <CategoryIcon className="text-blue-400" size={20} />
+          <CategoryIcon className="text-blue-400 group-hover:text-blue-300 transition-colors duration-300" size={24} />
         </motion.div>
       </div>
       
+      {/* Title with enhanced text effects */}
       <motion.h3 
-        className="text-xl font-bold text-white mb-4 group-hover:text-blue-400 transition-colors mt-2 text-center"
+        className="text-xl font-bold text-white mb-4 group-hover:text-blue-300 transition-all duration-300 mt-3 text-center
+                   tracking-wide"
         initial={{ opacity: 0.8 }}
         whileHover={{ 
-          scale: 1.05, 
-          color: "rgb(96, 165, 250)",
-          textShadow: "0 0 8px rgba(59, 130, 246, 0.5)" 
+          scale: 1.05,
+          letterSpacing: "0.05em",
+          textShadow: "0 0 12px rgba(59, 130, 246, 0.6)" 
         }}
       >
         {title}
       </motion.h3>
       
-      <div className="mt-4 flex flex-wrap gap-4 justify-center">
+      {/* Technologies grid with staggered animations */}
+      <div className="mt-6 grid grid-cols-3 sm:grid-cols-4 gap-4 justify-items-center">
         {technologies.map((tech, i) => (
           <Tooltip key={i} text={tech} position="top">
             <motion.div
-              className="skill-icon-container"
-              initial={{ opacity: 0, y: 20 }}
+              className="skill-icon-container w-10 h-10 flex items-center justify-center
+                         bg-gray-800/50 rounded-lg border border-gray-700/50
+                         hover:border-blue-500/50 hover:bg-gray-700/50"
+              initial={{ opacity: 0, scale: 0.8 }}
               animate={{ 
                 opacity: 1, 
-                y: 0,
+                scale: 1,
                 transition: { delay: index * 0.05 + i * 0.05 }
               }}
-              whileHover={hoverScale}
-              whileTap={{ scale: 0.95 }}
+              whileHover={{
+                scale: 1.15,
+                rotate: [0, -5, 5, 0],
+                transition: {
+                  duration: 0.3,
+                  rotate: {
+                    duration: 0.5,
+                    ease: "easeInOut",
+                  }
+                }
+              }}
             >
-              <SkillIcon name={tech} size={24} className="text-gray-300 group-hover:text-blue-400 transition-colors" />
+              <SkillIcon 
+                name={tech} 
+                size={24} 
+                className="text-gray-300 group-hover:text-blue-300 transition-all duration-300
+                          filter drop-shadow-[0_0_8px_rgba(59,130,246,0.3)]" 
+              />
             </motion.div>
           </Tooltip>
         ))}
       </div>
 
-      {/* Decorative elements */}
+      {/* Enhanced decorative elements */}
       <motion.div 
-        className="absolute -z-10 right-2 bottom-2 w-12 h-12 rounded-full bg-blue-500/10"
-        animate={pulseAnimation}
+        className="absolute -z-10 right-3 bottom-3 w-16 h-16 rounded-full bg-blue-500/10"
+        animate={{
+          scale: [1, 1.2, 1],
+          opacity: [0.3, 0.6, 0.3],
+          rotate: [0, 180, 360],
+        }}
+        transition={{
+          duration: 8,
+          repeat: Infinity,
+          ease: "linear"
+        }}
+      />
+      <motion.div 
+        className="absolute -z-10 left-3 top-3 w-12 h-12 rounded-full bg-purple-500/10"
+        animate={{
+          scale: [1.2, 1, 1.2],
+          opacity: [0.2, 0.5, 0.2],
+          rotate: [360, 180, 0],
+        }}
+        transition={{
+          duration: 6,
+          repeat: Infinity,
+          ease: "linear"
+        }}
       />
     </motion.div>
   );

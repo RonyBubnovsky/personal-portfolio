@@ -11,8 +11,8 @@ export const PERSONAL_INFO = {
   title: "Junior Full Stack Developer | Software Engineer",
   description: "Junior Full Stack Developer with expertise in JavaScript, React, Node.js, Express.js, and MongoDB, specializing in scalable and secure web applications. Skilled in REST APIs, authentication, and cloud deployment, with hands-on experience in CI/CD pipelines and containerization. Strong problem-solving skills and Agile development experience.",
   email: "rony.bubnovsky@gmail.com",
-  phone: "050-8465858",
-  location: "Israel"
+  phone: "+972508465858",
+  location: "Ashdod, Israel"
 };
 
 export const SKILLS = [
@@ -48,25 +48,46 @@ export const PROJECTS = [
     description: "A full-stack social platform for travelers to share experiences and connect. Built with React, Node.js (Express), and MongoDB. Features secure authentication, token management, and Firebase for image storage.",
     technologies: ["React", "Node.js", "Express", "MongoDB", "Firebase", "CircleCI", "Cypress"],
     duration: "July 2024 – August 2024",
-    image: "/projects/tiktour.jpg",
+    images: [
+      "/projects/tiktour.png",
+      "/projects/tiktour1.png",
+      "/projects/tiktour2.png",
+      "/projects/tiktour3.png"
+    ],
     link: "#",
-    github: "https://github.com/RonyBubnovsky"
+    github: {
+      client: "https://github.com/RonyBubnovsky/tiktour-client",
+      server: "https://github.com/RonyBubnovsky/tiktour-server"
+    }
   },
   {
     title: "Career Agent – AI-Powered Job Search Platform",
     description: "Full-stack job search platform using React, Node.js (Express), and Tailwind CSS. Features weighted job matching algorithm and Google Generative API for AI-driven CV analysis and job recommendations.",
     technologies: ["React", "Node.js", "Express", "Tailwind CSS", "Cloudinary", "GitHub Actions", "Google Generative API"],
     duration: "October 2024 – Present",
-    image: "/projects/career-agent.jpg",
-    link: "#",
-    github: "https://github.com/RonyBubnovsky"
+    images: [
+      "/projects/careeragent.png",
+      "/projects/careeragent1.png",
+      "/projects/careeragent2.png",
+      "/projects/careeragent3.png",
+      "/projects/careeragent4.png",
+      "/projects/careeragent5.png",
+      "/projects/careeragent6.png",
+      "/projects/careeragent7.png",
+      "/projects/careeragent8.png"
+    ],
+    link: "https://careeragent-ai.online",
+    github: "https://github.com/Bar-Levi/CareerAgent"
   },
   {
     title: "Task Management System – Microservices-Based",
     description: "Full-stack task management system using React and Flask (Python) following microservices architecture. Containerized with Docker and orchestrated with Docker Compose.",
     technologies: ["React", "Python", "Flask", "Docker", "Cypress", "Pytest", "Microservices"],
     duration: "January 2025",
-    image: "/projects/task-management.jpg",
+    images: [
+      "/projects/taskManager.png",
+      "/projects/taskManager1.png"
+    ],
     link: "#",
     github: "https://github.com/RonyBubnovsky"
   },
@@ -75,9 +96,15 @@ export const PROJECTS = [
     description: "Full-stack chess application with real-time gameplay and AI opponent using the minimax algorithm with alpha-beta pruning. Features Clerk authentication and Redis for user statistics.",
     technologies: ["Next.js", "TypeScript", "Tailwind CSS", "Redis", "Clerk", "Render"],
     duration: "March 2025",
-    image: "/projects/chess-app.jpg",
-    link: "#",
-    github: "https://github.com/RonyBubnovsky"
+    images: [
+      "/projects/chess.png",
+      "/projects/chess1.png",
+      "/projects/chess2.png",
+      "/projects/chess3.png",
+      "/projects/chess4.png"
+    ],
+    link: "https://ronychess.vercel.app/",
+    github: "https://github.com/RonyBubnovsky/Chess-Next.js"
   }
 ];
 
