@@ -1,22 +1,49 @@
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import "./globals.css";
+import '@/app/globals.css';
+import type { Metadata } from 'next';
+import { Inter, Montserrat, Poppins, Playfair_Display } from 'next/font/google';
 
-const inter = Inter({ subsets: ["latin"] });
+// Configure the Inter font
+const inter = Inter({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-inter',
+});
+
+// Configure the Montserrat font
+const montserrat = Montserrat({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-montserrat',
+});
+
+// Configure the Poppins font
+const poppins = Poppins({
+  weight: ['400', '500', '600', '700'],
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-poppins',
+});
+
+// Configure the Playfair Display font
+const playfair = Playfair_Display({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-playfair',
+});
 
 export const metadata: Metadata = {
-  title: "Rony Bubnovsky | Full Stack Developer",
-  description: "Junior Full Stack Developer with expertise in JavaScript, React, Node.js, Express.js, and MongoDB, specializing in scalable and secure web applications.",
+  title: 'Rony B | Full Stack Developer',
+  description: 'Portfolio website showcasing my skills, projects, and experience as a Full Stack Developer',
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
-    <html lang="en" className="scroll-smooth">
-      <body className={inter.className}>
+    <html lang="en" className={`${inter.variable} ${montserrat.variable} ${poppins.variable} ${playfair.variable}`}>
+      <body className="bg-gray-950 text-white">
         {children}
       </body>
     </html>

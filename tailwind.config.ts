@@ -46,6 +46,17 @@ const config: Config = {
           "100%": { transform: "translateX(0)", opacity: "1" },
         },
       },
+      fontFamily: {
+        inter: ['var(--font-inter)'],
+        montserrat: ['var(--font-montserrat)'],
+        poppins: ['var(--font-poppins)'],
+        playfair: ['var(--font-playfair)'],
+      },
+      backgroundImage: {
+        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
+        "gradient-conic":
+          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+      },
     },
   },
   plugins: [],
