@@ -1,53 +1,100 @@
 "use client";
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
+import { FaChevronLeft, FaChevronRight, FaGithub, FaExternalLinkAlt } from 'react-icons/fa';
+import { HiOutlinePause, HiOutlinePlay } from 'react-icons/hi2';
 
 interface ProjectImageCarouselProps {
   images: string[];
   title: string;
+  github?: string | { client: string; server: string };
+  link?: string;
 }
 
-const ProjectImageCarousel = ({ images, title }: ProjectImageCarouselProps) => {
+const ProjectImageCarousel = ({ images, title, github, link }: ProjectImageCarouselProps) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+  const [direction, setDirection] = useState(0);
+  const [isHovered, setIsHovered] = useState(false);
+
+  const slideVariants = {
+    enter: (direction: number) => ({
+      x: direction > 0 ? 1000 : -1000,
+      opacity: 0
+    }),
+    center: {
+      zIndex: 1,
+      x: 0,
+      opacity: 1
+    },
+    exit: (direction: number) => ({
+      zIndex: 0,
+      x: direction < 0 ? 1000 : -1000,
+      opacity: 0
+    })
+  };
+
+  const swipeConfidenceThreshold = 10000;
+  const swipePower = (offset: number, velocity: number) => {
+    return Math.abs(offset) * velocity;
+  };
+
+  const paginate = useCallback((newDirection: number) => {
+    setDirection(newDirection);
+    setCurrentIndex((prevIndex) => (prevIndex + newDirection + images.length) % images.length);
+  }, [images.length]);
 
   useEffect(() => {
-    if (!isAutoPlaying) return;
+    if (!isAutoPlaying || isHovered) return;
 
     const interval = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % images.length);
+      paginate(1);
     }, 5000);
 
     return () => clearInterval(interval);
-  }, [images.length, isAutoPlaying]);
+  }, [isAutoPlaying, paginate, isHovered]);
 
-  const handlePrevious = () => {
-    setIsAutoPlaying(false);
-    setCurrentIndex((prev) => (prev - 1 + images.length) % images.length);
+  const handleDragEnd = (e: any, { offset, velocity }: any) => {
+    const swipe = swipePower(offset.x, velocity.x);
+
+    if (swipe < -swipeConfidenceThreshold) {
+      paginate(1);
+    } else if (swipe > swipeConfidenceThreshold) {
+      paginate(-1);
+    }
   };
 
-  const handleNext = () => {
-    setIsAutoPlaying(false);
-    setCurrentIndex((prev) => (prev + 1) % images.length);
+  const controlStyles = {
+    base: "absolute p-3 rounded-full transition-all transform backdrop-blur-sm shadow-lg border",
+    light: "bg-gray-900/70 text-white hover:bg-gray-900/90 border-gray-600",
+    dark: "bg-white/70 text-gray-900 hover:bg-white/90 border-gray-200",
   };
 
   return (
     <div 
-      className="relative w-full aspect-video bg-gray-700 rounded-lg overflow-hidden"
-      onMouseEnter={() => setIsAutoPlaying(false)}
-      onMouseLeave={() => setIsAutoPlaying(true)}
+      className="relative w-full aspect-video bg-gray-800 rounded-lg overflow-hidden group"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
     >
-      <AnimatePresence mode="wait">
+      <AnimatePresence initial={false} custom={direction}>
         <motion.div
           key={currentIndex}
-          initial={{ opacity: 0, x: 100 }}
-          animate={{ opacity: 1, x: 0 }}
-          exit={{ opacity: 0, x: -100 }}
-          transition={{ duration: 0.3 }}
-          className="absolute inset-0"
+          custom={direction}
+          variants={slideVariants}
+          initial="enter"
+          animate="center"
+          exit="exit"
+          transition={{
+            x: { type: "spring", stiffness: 300, damping: 30 },
+            opacity: { duration: 0.2 }
+          }}
+          drag="x"
+          dragConstraints={{ left: 0, right: 0 }}
+          dragElastic={1}
+          onDragEnd={handleDragEnd}
+          className="absolute inset-0 cursor-grab active:cursor-grabbing"
         >
           <Image
             src={images[currentIndex]}
@@ -60,36 +107,101 @@ const ProjectImageCarousel = ({ images, title }: ProjectImageCarouselProps) => {
         </motion.div>
       </AnimatePresence>
 
+      {/* Dark overlay with links */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+        <div className="flex gap-4">
+          {github && (
+            typeof github === 'object' ? (
+              <>
+                <a
+                  href={github.client}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`${controlStyles.base} ${controlStyles.dark} hover:scale-110`}
+                  title="Client Repository"
+                >
+                  <FaGithub size={24} />
+                </a>
+                <a
+                  href={github.server}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`${controlStyles.base} ${controlStyles.dark} hover:scale-110`}
+                  title="Server Repository"
+                >
+                  <FaGithub size={24} />
+                </a>
+              </>
+            ) : (
+              <a
+                href={github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`${controlStyles.base} ${controlStyles.dark} hover:scale-110`}
+              >
+                <FaGithub size={24} />
+              </a>
+            )
+          )}
+          {link && link !== "#" && (
+            <a
+              href={link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`${controlStyles.base} ${controlStyles.dark} hover:scale-110`}
+            >
+              <FaExternalLinkAlt size={24} />
+            </a>
+          )}
+        </div>
+      </div>
+
+      {/* Navigation controls */}
       {images.length > 1 && (
         <>
           <button
-            onClick={handlePrevious}
-            className="absolute left-2 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/50 text-white hover:bg-black/70 transition-colors z-10"
+            onClick={() => paginate(-1)}
+            className={`${controlStyles.base} ${controlStyles.dark} left-4 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 z-20`}
             aria-label="Previous image"
           >
             <FaChevronLeft size={20} />
           </button>
           <button
-            onClick={handleNext}
-            className="absolute right-2 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/50 text-white hover:bg-black/70 transition-colors z-10"
+            onClick={() => paginate(1)}
+            className={`${controlStyles.base} ${controlStyles.dark} right-4 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 z-20`}
             aria-label="Next image"
           >
             <FaChevronRight size={20} />
           </button>
-          <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-2 z-10">
-            {images.map((_, index) => (
+
+          <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-3 z-20">
+            <div className="flex items-center gap-3 bg-gray-900/30 backdrop-blur-sm rounded-full px-3 py-2 border border-white/20">
               <button
-                key={index}
-                onClick={() => {
-                  setIsAutoPlaying(false);
-                  setCurrentIndex(index);
-                }}
-                className={`w-2 h-2 rounded-full transition-colors ${
-                  index === currentIndex ? 'bg-white' : 'bg-white/50'
-                }`}
-                aria-label={`Go to image ${index + 1}`}
-              />
-            ))}
+                onClick={() => setIsAutoPlaying(!isAutoPlaying)}
+                className={`${controlStyles.base} relative p-2 opacity-0 group-hover:opacity-100`}
+                aria-label={isAutoPlaying ? "Pause autoplay" : "Start autoplay"}
+              >
+                {isAutoPlaying ? <HiOutlinePause size={16} /> : <HiOutlinePlay size={16} />}
+              </button>
+              <div className="h-4 w-px bg-white/20" /> {/* Divider */}
+              <div className="flex gap-2">
+                {images.map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => {
+                      setDirection(index > currentIndex ? 1 : -1);
+                      setCurrentIndex(index);
+                    }}
+                    className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                      index === currentIndex 
+                        ? 'bg-white scale-125' 
+                        : 'bg-white/50 hover:bg-white/80'
+                    }`}
+                    aria-label={`Go to image ${index + 1}`}
+                  />
+                ))}
+              </div>
+            </div>
           </div>
         </>
       )}
