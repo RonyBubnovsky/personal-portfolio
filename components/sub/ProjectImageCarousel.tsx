@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useCallback } from 'react';
 import Image from 'next/image';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, PanInfo } from 'framer-motion';
 import { FaChevronLeft, FaChevronRight, FaGithub, FaExternalLinkAlt } from 'react-icons/fa';
 import { HiOutlinePause, HiOutlinePlay } from 'react-icons/hi2';
 
@@ -55,7 +55,7 @@ const ProjectImageCarousel = ({ images, title, github, link }: ProjectImageCarou
     return () => clearInterval(interval);
   }, [isAutoPlaying, paginate]);
 
-  const handleDragEnd = (e: any, { offset, velocity }: any) => {
+  const handleDragEnd = (e: MouseEvent | TouchEvent | PointerEvent, { offset, velocity }: PanInfo) => {
     const swipe = swipePower(offset.x, velocity.x);
 
     if (swipe < -swipeConfidenceThreshold) {

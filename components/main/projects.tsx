@@ -4,9 +4,16 @@ import React from 'react';
 import { PROJECTS } from "@/constants";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
-import { FaGithub, FaExternalLinkAlt } from "react-icons/fa";
+import { FaGithub, FaExternalLinkAlt, FaAws, FaJava, FaCheck, FaRobot } from "react-icons/fa";
 import ProjectImageCarousel from "../sub/ProjectImageCarousel";
-import { SiReact, SiNextdotjs, SiTypescript, SiTailwindcss, SiNodedotjs, SiExpress, SiMongodb, SiFirebase, SiCircleci, SiCypress, SiPython, SiFlask, SiDocker, SiClerk, SiRedis } from "react-icons/si";
+import { 
+  SiReact, SiNextdotjs, SiTypescript, SiJavascript, SiTailwindcss, 
+  SiNodedotjs, SiExpress, SiMongodb, SiFirebase, SiCircleci, 
+  SiCypress, SiPython, SiFlask, SiDocker, SiClerk, SiRedis,
+  SiHtml5, SiCss3, SiJest, SiRender, 
+  SiCloudinary, SiPostgresql, SiGithubactions, SiMocha, 
+  SiCplusplus, SiC, SiFastapi, SiJunit5,
+} from "react-icons/si";
 
 interface Project {
   title: string;
@@ -22,9 +29,11 @@ const techIcons: { [key: string]: React.ReactElement } = {
   "React": <SiReact className="text-[#61DAFB]" />,
   "Next.js": <SiNextdotjs className="text-white" />,
   "TypeScript": <SiTypescript className="text-[#3178C6]" />,
+  "JavaScript": <SiJavascript className="text-[#F7DF1E]" />,
   "Tailwind CSS": <SiTailwindcss className="text-[#38B2AC]" />,
   "Node.js": <SiNodedotjs className="text-[#339933]" />,
   "Express": <SiExpress className="text-white" />,
+  "Express.js": <SiExpress className="text-white" />,
   "MongoDB": <SiMongodb className="text-[#47A248]" />,
   "Firebase": <SiFirebase className="text-[#FFCA28]" />,
   "CircleCI": <SiCircleci className="text-[#343434]" />,
@@ -33,7 +42,32 @@ const techIcons: { [key: string]: React.ReactElement } = {
   "Flask": <SiFlask className="text-white" />,
   "Docker": <SiDocker className="text-[#2496ED]" />,
   "Clerk": <SiClerk className="text-[#6C47FF]" />,
-  "Redis": <SiRedis className="text-[#DC382D]" />
+  "Redis": <SiRedis className="text-[#DC382D]" />,
+  "HTML": <SiHtml5 className="text-[#E34F26]" />,
+  "CSS": <SiCss3 className="text-[#1572B6]" />,
+  "Jest": <SiJest className="text-[#C21325]" />,
+  "AWS EC2": <FaAws className="text-[#FF9900]" />,
+  "Render": <SiRender className="text-[#46E3B7]" />,
+  "Cloudinary": <SiCloudinary className="text-[#3448C5]" />,
+  "PostgreSQL": <SiPostgresql className="text-[#336791]" />,
+  "GitHub Actions": <SiGithubactions className="text-white" />,
+  "Pytest": <SiPython className="text-[#3776AB]" />,
+  "JUnit": <SiJunit5 className="text-[#25A162]" />,
+  "Mocha": <SiMocha className="text-[#8D6748]" />,
+  "Java": <FaJava className="text-[#007396]" />,
+  "C++": <SiCplusplus className="text-[#00599C]" />,
+  "C": <SiC className="text-[#A8B9CC]" />,
+  "FastAPI": <SiFastapi className="text-[#009688]" />,
+  "TDD": <FaCheck className="text-white" />,
+  "Unit Testing": <FaCheck className="text-white" />,
+  "Integration Testing": <FaCheck className="text-white" />,
+  "Microservices": <SiDocker className="text-[#2496ED]" />,
+  "Agile Development": <FaCheck className="text-white" />,
+  "CI/CD": <SiCircleci className="text-[#343434]" />,
+  "REST APIs": <SiExpress className="text-white" />,
+  "k6": <FaCheck className="text-white" />,
+  "JMeter": <FaCheck className="text-white" />,
+  "Google Generative API": <FaRobot className="text-[#4285F4]" />,
 };
 
 const ProjectsSection = () => {
@@ -126,15 +160,19 @@ const ProjectsSection = () => {
                   
                   <div className="flex flex-wrap gap-3 mb-8">
                     {project.technologies.map((tech, i) => (
-                      <div
+                      <motion.div
                         key={i}
-                        className="flex items-center gap-2 bg-gray-700/50 backdrop-blur-sm text-gray-200 text-sm rounded-full px-4 py-2 border border-gray-700"
+                        whileHover={{ 
+                          scale: 1.05,
+                          y: -5,
+                          boxShadow: "0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)"
+                        }}
+                        transition={{ type: "spring", stiffness: 500, damping: 15 }}
+                        className="flex items-center gap-2 bg-gray-700/50 backdrop-blur-sm text-gray-200 text-sm rounded-full px-4 py-2 border border-gray-700 hover:border-blue-400/50 transition-colors"
                       >
-                        {techIcons[tech] && (
-                          <span className="text-lg">{techIcons[tech]}</span>
-                        )}
+                        <span className="text-lg">{techIcons[tech] || <FaExternalLinkAlt className="text-white" />}</span>
                         <span>{tech}</span>
-                      </div>
+                      </motion.div>
                     ))}
                   </div>
 
