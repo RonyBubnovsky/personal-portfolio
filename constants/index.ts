@@ -84,9 +84,12 @@ export const PROJECTS = [
     description: "Full-stack task management system using React and Flask (Python) following microservices architecture. Containerized with Docker and orchestrated with Docker Compose.",
     technologies: ["React", "Python", "Flask", "Docker", "Cypress", "Pytest", "Microservices"],
     duration: "January 2025",
-    images: ["/projects/tiktour1.png"],
+    images: [
+      "/projects/taskManager.png",
+      "/projects/taskManager1.png"
+    ],
     link: "#",
-    github: "https://github.com/RonyBubnovsky/DailyTasksManagement-MicroServices"
+    github: "https://github.com/RonyBubnovsky"
   },
   {
     title: "Next.js Chess App – Full-Stack Chess with AI",
