@@ -93,7 +93,13 @@ export const PROJECTS = [
     description: "Full-stack chess application with real-time gameplay and AI opponent using the minimax algorithm with alpha-beta pruning. Features Clerk authentication and Redis for user statistics.",
     technologies: ["Next.js", "TypeScript", "Tailwind CSS", "Redis", "Clerk", "Render"],
     duration: "March 2025",
-    images: ["/projects/tiktour2.png"],
+    images: [
+      "/projects/chess.png",
+      "/projects/chess1.png",
+      "/projects/chess2.png",
+      "/projects/chess3.png",
+      "/projects/chess4.png"
+    ],
     link: "https://ronychess.vercel.app/",
     github: "https://github.com/RonyBubnovsky/Chess-Next.js"
   }
