@@ -55,7 +55,11 @@ const Navbar = () => {
   // Close menu when clicking outside
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
-      if (isMenuOpen && e.target && !(e.target as Element).closest('nav')) {
+      // Don't close if clicking on a link or inside nav element
+      if (isMenuOpen && 
+          e.target && 
+          !(e.target as Element).closest('nav a') && 
+          !(e.target as Element).closest('nav')) {
         setIsMenuOpen(false);
       }
     };
@@ -80,19 +84,24 @@ const Navbar = () => {
   // Handle smooth scrolling with offset
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, sectionId: string) => {
     e.preventDefault();
-    const element = document.getElementById(sectionId);
-    if (element) {
-      const navHeight = 80; // Approximate navbar height
-      const elementPosition = element.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.pageYOffset - navHeight;
+    
+    // Close menu first
+    setIsMenuOpen(false);
+    
+    // Add a small delay before scrolling to allow the menu to close first on mobile
+    setTimeout(() => {
+      const element = document.getElementById(sectionId);
+      if (element) {
+        const navHeight = 80; // Approximate navbar height
+        const elementPosition = element.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.pageYOffset - navHeight;
 
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: "smooth"
-      });
-      
-      setIsMenuOpen(false);
-    }
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: "smooth"
+        });
+      }
+    }, 100); // 100ms delay
   };
 
   const toggleMenu = () => {
@@ -112,7 +121,10 @@ const Navbar = () => {
       )}
     >
       <div className="container mx-auto px-4 flex justify-between items-center">
-        <Link href="#about" onClick={(e) => handleNavClick(e, "about")}>
+        <Link href="#about" onClick={(e) => {
+          e.stopPropagation(); // Stop event from bubbling up
+          handleNavClick(e, "about");
+        }}>
           <motion.span 
             className="text-white font-bold text-xl sm:text-2xl cursor-pointer"
             whileHover={{ scale: 1.05 }}
@@ -132,7 +144,10 @@ const Navbar = () => {
               <li key={index} className="relative">
                 <Link
                   href={link.path}
-                  onClick={(e) => handleNavClick(e, sectionId)}
+                  onClick={(e) => {
+                    e.stopPropagation(); // Stop event from bubbling up
+                    handleNavClick(e, sectionId);
+                  }}
                   className={cn(
                     "text-gray-300 font-medium hover:text-white transition-colors duration-300 py-2 px-1",
                     isActive && "text-white"
@@ -195,7 +210,10 @@ const Navbar = () => {
                   >
                     <Link
                       href={link.path}
-                      onClick={(e) => handleNavClick(e, sectionId)}
+                      onClick={(e) => {
+                        e.stopPropagation(); // Stop event from bubbling up
+                        handleNavClick(e, sectionId);
+                      }}
                       className={cn(
                         "text-gray-300 hover:text-white transition-all duration-300 block",
                         isActive && "text-white"
