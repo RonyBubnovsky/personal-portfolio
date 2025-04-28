@@ -4,8 +4,8 @@ import { PERSONAL_INFO, SOCIAL_LINKS, LANGUAGES } from "@/constants";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { useState, useRef } from "react";
-import { HiOutlineMail, HiOutlinePhone, HiOutlineLocationMarker, HiChevronRight } from "react-icons/hi";
-import { FaGithub, FaLinkedin, FaPhoneAlt, FaEnvelope } from "react-icons/fa";
+import { HiOutlineMail, HiOutlineLocationMarker, HiChevronRight } from "react-icons/hi";
+import { FaGithub, FaLinkedin, FaPhoneAlt, FaEnvelope, FaFileAlt } from "react-icons/fa";
 import { SiGooglemaps } from "react-icons/si";
 import Link from "next/link";
 
@@ -44,12 +44,13 @@ const ContactSection = () => {
       link: `mailto:${PERSONAL_INFO.email}`
     },
     {
-      id: 'phone',
-      title: 'Phone',
-      value: PERSONAL_INFO.phone,
-      icon: <HiOutlinePhone className="text-3xl" />,
+      id: 'cv',
+      title: 'Resume',
+      value: 'Download my professional CV',
+      icon: <FaFileAlt className="text-3xl" />,
       colorClass: 'from-green-600 to-green-400',
-      link: `tel:${PERSONAL_INFO.phone}`
+      actionText: "Download",
+      link: '/cv/Rony_Bubnovsky_CV.pdf'
     },
     {
       id: 'location',
@@ -91,8 +92,8 @@ const ContactSection = () => {
       label: 'Phone',
       url: `tel:${PERSONAL_INFO.phone}`,
       icon: <FaPhoneAlt size={18} />,
-      color: 'hover:text-purple-400',
-      bgHover: 'group-hover:bg-purple-900/20'
+      color: 'hover:text-yellow-400',
+      bgHover: 'group-hover:bg-yellow-900/20'
     }
   ];
 
@@ -141,6 +142,7 @@ const ContactSection = () => {
               key={item.id}
               target={item.id === 'location' ? "_blank" : undefined}
               rel={item.id === 'location' ? "noopener noreferrer" : undefined}
+              download={item.id === 'cv' ? true : undefined}
             >
               <motion.div
                 whileHover={{ y: -10, scale: 1.02 }}
@@ -175,7 +177,7 @@ const ContactSection = () => {
                       </button>
                     ) : (
                       <span className="flex items-center gap-1 group-hover:gap-2 transition-all duration-300">
-                        Connect
+                        {item.actionText || "Connect"}
                         <HiChevronRight className="transition-transform group-hover:translate-x-1" />
                       </span>
                     )}
@@ -285,6 +287,7 @@ const ContactSection = () => {
                   href={social.url}
                   target="_blank"
                   rel="noopener noreferrer"
+                  download={social.id === 'cv' ? true : undefined}
                   initial={{ opacity: 0, y: 20 }}
                   animate={inView ? { opacity: 1, y: 0 } : {}}
                   transition={{ duration: 0.4, delay: 0.6 + (index * 0.1) }}
