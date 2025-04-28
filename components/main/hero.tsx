@@ -284,9 +284,7 @@ const HeroSection = () => {
               
               {/* Profile container */}
               <div 
-                className="w-48 h-48 sm:w-56 sm:h-56 md:w-64 md:h-64 lg:w-72 lg:h-72 relative rounded-full border-2 border-gray-800 p-2 bg-gray-900/50 backdrop-blur-sm group"
-                onMouseEnter={() => setIsProfileHovered(true)}
-                onMouseLeave={() => setIsProfileHovered(false)}
+                className="w-48 h-48 sm:w-56 sm:h-56 md:w-64 md:h-64 lg:w-72 lg:h-72 relative rounded-full border-2 border-gray-800 p-2 bg-gray-900/50 backdrop-blur-sm"
               >
                 {/* Rotating border effect */}
                 <div className="absolute inset-0 -z-10">
@@ -294,7 +292,11 @@ const HeroSection = () => {
                 </div>
                 
                 {/* Profile image */}
-                <div className="w-full h-full rounded-full overflow-hidden flex items-center justify-center border border-gray-700/50 relative">
+                <div 
+                  className="w-full h-full rounded-full overflow-hidden flex items-center justify-center border border-gray-700/50 relative group cursor-pointer"
+                  onMouseEnter={() => setIsProfileHovered(true)}
+                  onMouseLeave={() => setIsProfileHovered(false)}
+                >
                   <Image 
                     src="/images/profileImage.png" 
                     alt="Profile Image"
