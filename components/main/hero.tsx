@@ -1,7 +1,7 @@
 "use client";
 import { PERSONAL_INFO, SOCIAL_LINKS } from "@/constants";
 import { motion } from "framer-motion";
-import { FaGithub, FaLinkedin, FaReact, FaNodeJs, FaPhoneAlt, FaEnvelope, FaUser } from "react-icons/fa";
+import { FaGithub, FaLinkedin, FaReact, FaNodeJs, FaPhoneAlt, FaUser } from "react-icons/fa";
 import { SiJavascript, SiTypescript, SiExpress, SiMongodb, SiTailwindcss } from "react-icons/si";
 import { useState, useEffect } from "react";
 import { textVariant, fadeIn } from "@/lib/motion";
@@ -116,7 +116,7 @@ const HeroSection = () => {
                 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white font-playfair"
                 variants={textVariant(0.1)}
               >
-                Hi, I'm {PERSONAL_INFO.name} <br className="hidden sm:block" />
+                Hi, I&apos;m {PERSONAL_INFO.name} <br className="hidden sm:block" />
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-purple-500">Full Stack Developer</span>
               </motion.h1>
               
