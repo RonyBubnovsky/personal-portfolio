@@ -65,9 +65,19 @@ export const PROJECTS = [
     description: "Full-stack job search platform using React, Node.js (Express), and Tailwind CSS. Features weighted job matching algorithm and Google Generative API for AI-driven CV analysis and job recommendations.",
     technologies: ["React", "Node.js", "Express", "Tailwind CSS", "Cloudinary", "GitHub Actions", "Google Generative API"],
     duration: "October 2024 – Present",
-    images: ["/projects/tiktour.png"],
-    link: "#",
-    github: "https://github.com/RonyBubnovsky"
+    images: [
+      "/projects/careeragent.png",
+      "/projects/careeragent1.png",
+      "/projects/careeragent2.png",
+      "/projects/careeragent3.png",
+      "/projects/careeragent4.png",
+      "/projects/careeragent5.png",
+      "/projects/careeragent6.png",
+      "/projects/careeragent7.png",
+      "/projects/careeragent8.png"
+    ],
+    link: "https://careeragent-ai.online",
+    github: "https://github.com/Bar-Levi/CareerAgent"
   },
   {
     title: "Task Management System – Microservices-Based",
@@ -76,7 +86,7 @@ export const PROJECTS = [
     duration: "January 2025",
     images: ["/projects/tiktour1.png"],
     link: "#",
-    github: "https://github.com/RonyBubnovsky"
+    github: "https://github.com/RonyBubnovsky/DailyTasksManagement-MicroServices"
   },
   {
     title: "Next.js Chess App – Full-Stack Chess with AI",
@@ -84,8 +94,8 @@ export const PROJECTS = [
     technologies: ["Next.js", "TypeScript", "Tailwind CSS", "Redis", "Clerk", "Render"],
     duration: "March 2025",
     images: ["/projects/tiktour2.png"],
-    link: "#",
-    github: "https://github.com/RonyBubnovsky"
+    link: "https://ronychess.vercel.app/",
+    github: "https://github.com/RonyBubnovsky/Chess-Next.js"
   }
 ];
 
