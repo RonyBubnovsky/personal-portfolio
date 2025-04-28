@@ -54,7 +54,7 @@ const SkillCard = ({ title, technologies, index }: SkillCardProps) => {
         {technologies.map((tech, i) => (
           <Tooltip key={i} text={tech} position="top">
             <motion.div
-              className="skill-icon-container"
+              className="skill-icon-container w-8 h-8 flex items-center justify-center"
               initial={{ opacity: 0, y: 20 }}
               animate={{ 
                 opacity: 1, 
