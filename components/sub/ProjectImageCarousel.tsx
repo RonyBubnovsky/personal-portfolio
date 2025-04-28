@@ -17,7 +17,6 @@ const ProjectImageCarousel = ({ images, title, github, link }: ProjectImageCarou
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
   const [direction, setDirection] = useState(0);
-  const [isHovered, setIsHovered] = useState(false);
 
   const slideVariants = {
     enter: (direction: number) => ({
@@ -47,14 +46,14 @@ const ProjectImageCarousel = ({ images, title, github, link }: ProjectImageCarou
   }, [images.length]);
 
   useEffect(() => {
-    if (!isAutoPlaying || isHovered) return;
+    if (!isAutoPlaying) return;
 
     const interval = setInterval(() => {
       paginate(1);
     }, 5000);
 
     return () => clearInterval(interval);
-  }, [isAutoPlaying, paginate, isHovered]);
+  }, [isAutoPlaying, paginate]);
 
   const handleDragEnd = (e: any, { offset, velocity }: any) => {
     const swipe = swipePower(offset.x, velocity.x);
@@ -73,11 +72,8 @@ const ProjectImageCarousel = ({ images, title, github, link }: ProjectImageCarou
   };
 
   return (
-    <div 
-      className="relative w-full aspect-video bg-gray-800 rounded-lg overflow-hidden group"
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-    >
+    <div className="carousel-container relative w-full aspect-video bg-gray-800 rounded-lg overflow-hidden">
+      {/* Main Image */}
       <AnimatePresence initial={false} custom={direction}>
         <motion.div
           key={currentIndex}
@@ -94,7 +90,7 @@ const ProjectImageCarousel = ({ images, title, github, link }: ProjectImageCarou
           dragConstraints={{ left: 0, right: 0 }}
           dragElastic={1}
           onDragEnd={handleDragEnd}
-          className="absolute inset-0 cursor-grab active:cursor-grabbing"
+          className="absolute inset-0 cursor-grab active:cursor-grabbing z-10"
         >
           <Image
             src={images[currentIndex]}
@@ -107,52 +103,59 @@ const ProjectImageCarousel = ({ images, title, github, link }: ProjectImageCarou
         </motion.div>
       </AnimatePresence>
 
-      {/* Dark overlay with links */}
-      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-        <div className="flex gap-4">
-          {github && (
-            typeof github === 'object' ? (
-              <>
+      {/* Dark overlay */}
+      <div className="controls-overlay absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/20 opacity-0 transition-opacity duration-300 z-20">
+        {/* Links */}
+        <div className="absolute inset-0 flex items-center justify-center">
+          <div className="flex gap-4">
+            {github && (
+              typeof github === 'object' ? (
+                <>
+                  <a
+                    href={github.client}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 px-4 py-2 bg-white/90 text-gray-900 rounded-full hover:bg-white transition-all transform hover:scale-105 backdrop-blur-sm"
+                    title="Client Repository"
+                  >
+                    <FaGithub size={20} />
+                    <span className="font-medium">Client</span>
+                  </a>
+                  <a
+                    href={github.server}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 px-4 py-2 bg-white/90 text-gray-900 rounded-full hover:bg-white transition-all transform hover:scale-105 backdrop-blur-sm"
+                    title="Server Repository"
+                  >
+                    <FaGithub size={20} />
+                    <span className="font-medium">Server</span>
+                  </a>
+                </>
+              ) : (
                 <a
-                  href={github.client}
+                  href={github}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={`${controlStyles.base} ${controlStyles.dark} hover:scale-110`}
-                  title="Client Repository"
+                  className="flex items-center gap-2 px-4 py-2 bg-white/90 text-gray-900 rounded-full hover:bg-white transition-all transform hover:scale-105 backdrop-blur-sm"
                 >
-                  <FaGithub size={24} />
+                  <FaGithub size={20} />
+                  <span className="font-medium">View Code</span>
                 </a>
-                <a
-                  href={github.server}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={`${controlStyles.base} ${controlStyles.dark} hover:scale-110`}
-                  title="Server Repository"
-                >
-                  <FaGithub size={24} />
-                </a>
-              </>
-            ) : (
+              )
+            )}
+            {link && link !== "#" && (
               <a
-                href={github}
+                href={link}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`${controlStyles.base} ${controlStyles.dark} hover:scale-110`}
+                className="flex items-center gap-2 px-4 py-2 bg-white/90 text-gray-900 rounded-full hover:bg-white transition-all transform hover:scale-105 backdrop-blur-sm"
               >
-                <FaGithub size={24} />
+                <FaExternalLinkAlt size={20} />
+                <span className="font-medium">Live Demo</span>
               </a>
-            )
-          )}
-          {link && link !== "#" && (
-            <a
-              href={link}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={`${controlStyles.base} ${controlStyles.dark} hover:scale-110`}
-            >
-              <FaExternalLinkAlt size={24} />
-            </a>
-          )}
+            )}
+          </div>
         </div>
       </div>
 
@@ -161,29 +164,29 @@ const ProjectImageCarousel = ({ images, title, github, link }: ProjectImageCarou
         <>
           <button
             onClick={() => paginate(-1)}
-            className={`${controlStyles.base} ${controlStyles.dark} left-4 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 z-20`}
+            className={`${controlStyles.base} ${controlStyles.dark} left-4 top-1/2 -translate-y-1/2 z-30 opacity-0 carousel-control`}
             aria-label="Previous image"
           >
             <FaChevronLeft size={20} />
           </button>
           <button
             onClick={() => paginate(1)}
-            className={`${controlStyles.base} ${controlStyles.dark} right-4 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 z-20`}
+            className={`${controlStyles.base} ${controlStyles.dark} right-4 top-1/2 -translate-y-1/2 z-30 opacity-0 carousel-control`}
             aria-label="Next image"
           >
             <FaChevronRight size={20} />
           </button>
 
-          <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-3 z-20">
+          <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-3 z-30 opacity-0 carousel-control">
             <div className="flex items-center gap-3 bg-gray-900/30 backdrop-blur-sm rounded-full px-3 py-2 border border-white/20">
               <button
                 onClick={() => setIsAutoPlaying(!isAutoPlaying)}
-                className={`${controlStyles.base} relative p-2 opacity-0 group-hover:opacity-100`}
+                className={`${controlStyles.base} relative p-2`}
                 aria-label={isAutoPlaying ? "Pause autoplay" : "Start autoplay"}
               >
                 {isAutoPlaying ? <HiOutlinePause size={16} /> : <HiOutlinePlay size={16} />}
               </button>
-              <div className="h-4 w-px bg-white/20" /> {/* Divider */}
+              <div className="h-4 w-px bg-white/20" />
               <div className="flex gap-2">
                 {images.map((_, index) => (
                   <button
@@ -205,6 +208,14 @@ const ProjectImageCarousel = ({ images, title, github, link }: ProjectImageCarou
           </div>
         </>
       )}
+
+      {/* Add CSS-only hover effect with a style tag */}
+      <style jsx>{`
+        .carousel-container:hover .controls-overlay,
+        .carousel-container:hover .carousel-control {
+          opacity: 1;
+        }
+      `}</style>
     </div>
   );
 };
