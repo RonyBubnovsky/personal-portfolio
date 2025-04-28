@@ -45,8 +45,15 @@ const Navbar = () => {
       }
     };
 
-    // Set initial active section
+    // Force scroll to about section on page load/refresh
+    window.scrollTo({
+      top: 0,
+      behavior: "instant"
+    });
+    
+    // Set active section to "about" and update URL
     setActiveSection("about");
+    window.history.pushState(null, '', `#about`);
     
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
@@ -101,7 +108,7 @@ const Navbar = () => {
           behavior: "smooth"
         });
         
-        // Update URL hash after scrolling
+        // Update URL after scrolling
         window.history.pushState(null, '', `#${sectionId}`);
       }
     }, 100); // 100ms delay
