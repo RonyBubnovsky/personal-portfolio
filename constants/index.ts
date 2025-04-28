@@ -65,7 +65,7 @@ export const PROJECTS = [
     description: "Full-stack job search platform using React, Node.js (Express), and Tailwind CSS. Features weighted job matching algorithm and Google Generative API for AI-driven CV analysis and job recommendations.",
     technologies: ["React", "Node.js", "Express", "Tailwind CSS", "Cloudinary", "GitHub Actions", "Google Generative API"],
     duration: "October 2024 – Present",
-    images: ["/projects/career-agent.jpg"],
+    images: ["/projects/tiktour.png"],
     link: "#",
     github: "https://github.com/RonyBubnovsky"
   },
@@ -74,7 +74,7 @@ export const PROJECTS = [
     description: "Full-stack task management system using React and Flask (Python) following microservices architecture. Containerized with Docker and orchestrated with Docker Compose.",
     technologies: ["React", "Python", "Flask", "Docker", "Cypress", "Pytest", "Microservices"],
     duration: "January 2025",
-    images: ["/projects/task-management.jpg"],
+    images: ["/projects/tiktour1.png"],
     link: "#",
     github: "https://github.com/RonyBubnovsky"
   },
@@ -83,7 +83,7 @@ export const PROJECTS = [
     description: "Full-stack chess application with real-time gameplay and AI opponent using the minimax algorithm with alpha-beta pruning. Features Clerk authentication and Redis for user statistics.",
     technologies: ["Next.js", "TypeScript", "Tailwind CSS", "Redis", "Clerk", "Render"],
     duration: "March 2025",
-    images: ["/projects/chess-app.jpg"],
+    images: ["/projects/tiktour2.png"],
     link: "#",
     github: "https://github.com/RonyBubnovsky"
   }

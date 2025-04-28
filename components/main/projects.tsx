@@ -22,6 +22,8 @@ const ProjectsSection = () => {
     threshold: 0.1,
   });
 
+  const projects: Project[] = PROJECTS;
+
   return (
     <section id="projects" className="py-20 bg-gray-800">
       <div className="container mx-auto px-4">
@@ -41,7 +43,7 @@ const ProjectsSection = () => {
         </motion.div>
 
         <div className="space-y-24">
-          {PROJECTS.map((project, index) => (
+          {projects.map((project, index) => (
             <motion.div
               key={index}
               initial={{ opacity: 0, y: 50 }}
@@ -53,8 +55,8 @@ const ProjectsSection = () => {
             >
               <div className="w-full lg:w-1/2">
                 <div className="relative overflow-hidden rounded-lg aspect-video bg-gray-700 shadow-xl group">
-                  <div className="absolute inset-0 bg-blue-600/10 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity z-20">
-                    <div className="flex gap-4">
+                  <div className="absolute inset-0 bg-blue-600/10 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity z-20 pointer-events-none">
+                    <div className="flex gap-4 pointer-events-auto">
                       {project.github && (
                         typeof project.github === 'object' ? (
                           <>
