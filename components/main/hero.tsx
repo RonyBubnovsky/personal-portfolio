@@ -327,6 +327,29 @@ const HeroSection = () => {
                     <span className="text-purple-400">function</span> <span className="text-green-400">code</span>() &#123;
                   </div>
                 </motion.div>
+
+                {/* New floating code snippets on right side */}
+                <motion.div 
+                  className="absolute top-[-3rem] right-[-3rem] sm:right-[-4rem] md:right-[-6rem] p-2 sm:p-3 bg-gray-800/90 backdrop-blur-sm rounded-lg border border-gray-700/50 shadow-xl w-28 sm:w-32 text-[10px] sm:text-xs font-mono z-10 hidden sm:block"
+                  initial={{ opacity: 0, y: -20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 1.6 }}
+                >
+                  <div className="text-gray-400">
+                    <span className="text-pink-400">import</span> &#123; <span className="text-green-400">creativity</span> &#125;
+                  </div>
+                </motion.div>
+                
+                <motion.div 
+                  className="absolute bottom-[-3rem] right-[-5rem] sm:right-[-6rem] md:right-[-8rem] p-2 sm:p-3 bg-gray-800/90 backdrop-blur-sm rounded-lg border border-gray-700/50 shadow-xl w-32 sm:w-36 text-[10px] sm:text-xs font-mono z-10 hidden sm:block"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 1.8 }}
+                >
+                  <div className="text-gray-400">
+                    <span className="text-orange-400">return</span> <span className="text-blue-400">&lt;</span><span className="text-green-400">Solution</span><span className="text-blue-400">/&gt;</span>
+                  </div>
+                </motion.div>
               </div>
             </div>
           </motion.div>
