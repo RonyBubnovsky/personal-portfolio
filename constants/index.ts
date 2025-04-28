@@ -48,9 +48,12 @@ export const PROJECTS = [
     description: "A full-stack social platform for travelers to share experiences and connect. Built with React, Node.js (Express), and MongoDB. Features secure authentication, token management, and Firebase for image storage.",
     technologies: ["React", "Node.js", "Express", "MongoDB", "Firebase", "CircleCI", "Cypress"],
     duration: "July 2024 – August 2024",
-    image: "/projects/tiktour.jpg",
+    image: "/projects/tiktour.png",
     link: "#",
-    github: "https://github.com/RonyBubnovsky"
+    github: {
+      client: "https://github.com/RonyBubnovsky/tiktour-client",
+      server: "https://github.com/RonyBubnovsky/tiktour-server"
+    }
   },
   {
     title: "Career Agent – AI-Powered Job Search Platform",

@@ -4,6 +4,17 @@ import { PROJECTS } from "@/constants";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { FaGithub, FaExternalLinkAlt } from "react-icons/fa";
+import Image from "next/image";
+
+interface Project {
+  title: string;
+  description: string;
+  technologies: string[];
+  duration: string;
+  image: string;
+  link: string;
+  github: string | { client: string; server: string };
+}
 
 const ProjectsSection = () => {
   const [ref, inView] = useInView({
@@ -42,17 +53,40 @@ const ProjectsSection = () => {
             >
               <div className="w-full lg:w-1/2">
                 <div className="relative overflow-hidden rounded-lg aspect-video bg-gray-700 shadow-xl group">
-                  <div className="absolute inset-0 bg-blue-600/10 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                  <div className="absolute inset-0 bg-blue-600/10 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity z-10">
                     <div className="flex gap-4">
                       {project.github && (
-                        <a
-                          href={project.github}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="p-3 rounded-full bg-gray-900/80 text-white hover:bg-gray-900 transition"
-                        >
-                          <FaGithub size={24} />
-                        </a>
+                        typeof project.github === 'object' ? (
+                          <>
+                            <a
+                              href={project.github.client}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="p-3 rounded-full bg-gray-900/80 text-white hover:bg-gray-900 transition"
+                              title="Client Repository"
+                            >
+                              <FaGithub size={24} />
+                            </a>
+                            <a
+                              href={project.github.server}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="p-3 rounded-full bg-gray-900/80 text-white hover:bg-gray-900 transition"
+                              title="Server Repository"
+                            >
+                              <FaGithub size={24} />
+                            </a>
+                          </>
+                        ) : (
+                          <a
+                            href={project.github}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="p-3 rounded-full bg-gray-900/80 text-white hover:bg-gray-900 transition"
+                          >
+                            <FaGithub size={24} />
+                          </a>
+                        )
                       )}
                       {project.link && project.link !== "#" && (
                         <a
@@ -66,10 +100,13 @@ const ProjectsSection = () => {
                       )}
                     </div>
                   </div>
-                  <div className="absolute inset-0 flex items-center justify-center text-gray-400">
-                    {/* Project image placeholder */}
-                    <span className="text-2xl">{project.title.substring(0, 2)}</span>
-                  </div>
+                  <Image
+                    src={project.image}
+                    alt={project.title}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                  />
                 </div>
               </div>
 
@@ -89,15 +126,38 @@ const ProjectsSection = () => {
                 </div>
                 <div className="flex gap-4">
                   {project.github && (
-                    <a
-                      href={project.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center gap-2 text-blue-400 hover:text-blue-300 transition"
-                    >
-                      <FaGithub size={18} />
-                      View Code
-                    </a>
+                    typeof project.github === 'object' ? (
+                      <>
+                        <a
+                          href={project.github.client}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center gap-2 text-blue-400 hover:text-blue-300 transition"
+                        >
+                          <FaGithub size={18} />
+                          Client Code
+                        </a>
+                        <a
+                          href={project.github.server}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center gap-2 text-blue-400 hover:text-blue-300 transition"
+                        >
+                          <FaGithub size={18} />
+                          Server Code
+                        </a>
+                      </>
+                    ) : (
+                      <a
+                        href={project.github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-2 text-blue-400 hover:text-blue-300 transition"
+                      >
+                        <FaGithub size={18} />
+                        View Code
+                      </a>
+                    )
                   )}
                   {project.link && project.link !== "#" && (
                     <a
