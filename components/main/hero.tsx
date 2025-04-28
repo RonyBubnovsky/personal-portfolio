@@ -102,16 +102,16 @@ const HeroSection = () => {
               }}
             >
               <motion.div variants={fadeIn("up", 0)}>
-                <span className="inline-block py-1 px-3 text-xs font-medium bg-blue-900/30 text-blue-400 rounded-full border border-blue-800/50 mb-4">
+                <span className="inline-block py-1 px-3 text-xs font-medium bg-blue-900/30 text-blue-400 rounded-full border border-blue-800/50 mb-4 font-inter">
                   Hello, I&apos;m {PERSONAL_INFO.name}
                 </span>
               </motion.div>
               
               <motion.h1 
-                className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white"
+                className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white font-playfair"
                 variants={textVariant(0.1)}
               >
-                I build <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-purple-500">exceptional</span> web experiences
+                I create <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-purple-500">thoughtful</span> web solutions
               </motion.h1>
               
               <motion.div 
@@ -128,7 +128,7 @@ const HeroSection = () => {
                       key={index} 
                       className="h-12 sm:h-16 md:h-20 flex items-center"
                     >
-                      <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-medium text-gray-400">
+                      <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-medium text-gray-400 font-montserrat">
                         <span className="text-blue-500">&lt;</span> {role} <span className="text-blue-500">/&gt;</span>
                       </h2>
                     </div>
@@ -137,7 +137,7 @@ const HeroSection = () => {
               </motion.div>
               
               <motion.p 
-                className="text-sm sm:text-base md:text-lg text-gray-400 max-w-xl"
+                className="text-sm sm:text-base md:text-lg text-gray-400 max-w-xl font-inter"
                 variants={fadeIn("up", 0.3)}
               >
                 {PERSONAL_INFO.description}
@@ -148,7 +148,7 @@ const HeroSection = () => {
                 className="flex flex-wrap gap-2 sm:gap-3 items-center"
                 variants={fadeIn("up", 0.4)}
               >
-                <span className="text-gray-500 text-sm">Tech Stack:</span>
+                <span className="text-gray-500 text-sm font-inter">Tech Stack:</span>
                 <motion.div 
                   className="flex gap-2 sm:gap-3"
                   variants={{
@@ -189,36 +189,60 @@ const HeroSection = () => {
                   href={SOCIAL_LINKS.github}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2 py-2 sm:py-3 px-4 sm:px-6 rounded-full bg-gray-800 text-white border border-gray-700 hover:bg-gray-700 transition-all text-sm sm:text-base"
-                  whileHover={{ y: -5, scale: 1.02 }}
+                  className="group flex items-center gap-2 py-2.5 sm:py-3 px-5 sm:px-7 rounded-xl bg-gray-800/70 backdrop-blur-sm text-white border border-gray-700/50 hover:border-gray-600 transition-all duration-300 text-sm sm:text-base font-poppins relative overflow-hidden shadow-lg"
+                  whileHover={{ 
+                    y: -5, 
+                    boxShadow: "0 15px 30px -10px rgba(0, 0, 0, 0.4)" 
+                  }}
                   whileTap={{ scale: 0.98 }}
                 >
-                  <FaGithub className="text-lg" />
-                  <span>GitHub</span>
+                  <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-gray-800 to-gray-900 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl" />
+                  <FaGithub className="text-lg relative z-10" />
+                  <span className="relative z-10">GitHub</span>
+                  <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-gradient-to-r from-blue-500 to-purple-500 group-hover:w-full transition-all duration-300 ease-out" />
                 </motion.a>
                 
                 <motion.a
                   href={SOCIAL_LINKS.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2 py-2 sm:py-3 px-4 sm:px-6 rounded-full bg-gradient-to-r from-blue-600 to-blue-500 text-white hover:from-blue-700 hover:to-blue-600 transition-all shadow-lg shadow-blue-900/20 text-sm sm:text-base"
-                  whileHover={{ y: -5, scale: 1.02, boxShadow: "0 10px 25px -5px rgba(59, 130, 246, 0.3)" }}
+                  className="group flex items-center gap-2 py-2.5 sm:py-3 px-5 sm:px-7 rounded-xl bg-gradient-to-r from-blue-600/90 to-blue-500/90 backdrop-blur-sm text-white border border-blue-500/20 transition-all duration-300 text-sm sm:text-base font-poppins relative overflow-hidden shadow-lg"
+                  whileHover={{ 
+                    y: -5, 
+                    boxShadow: "0 15px 30px -10px rgba(59, 130, 246, 0.4)"
+                  }}
                   whileTap={{ scale: 0.98 }}
                 >
-                  <FaLinkedin className="text-lg" />
-                  <span>LinkedIn</span>
+                  <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-blue-600 to-indigo-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl" />
+                  <FaLinkedin className="text-lg relative z-10" />
+                  <span className="relative z-10">LinkedIn</span>
+                  <motion.span 
+                    className="absolute inset-0 rounded-xl border border-white/20 z-0"
+                    animate={{ 
+                      boxShadow: ["0 0 0px 0px rgba(255,255,255,0.2)", "0 0 8px 3px rgba(255,255,255,0)", "0 0 0px 0px rgba(255,255,255,0.2)"]
+                    }}
+                    transition={{ 
+                      repeat: Infinity, 
+                      duration: 2.5 
+                    }}
+                  />
                 </motion.a>
                 
                 <motion.a
                   href="#projects"
-                  className="flex items-center gap-2 py-2 sm:py-3 px-4 sm:px-6 rounded-full bg-transparent text-blue-400 border border-blue-500/30 hover:bg-blue-900/20 transition-all text-sm sm:text-base"
-                  whileHover={{ y: -5, scale: 1.02 }}
+                  className="group flex items-center gap-2 py-2.5 sm:py-3 px-5 sm:px-7 rounded-xl bg-transparent backdrop-blur-sm text-blue-400 border border-blue-500/30 hover:border-blue-400/50 transition-all duration-300 text-sm sm:text-base font-poppins relative overflow-hidden"
+                  whileHover={{ 
+                    y: -5,
+                    boxShadow: "0 15px 30px -15px rgba(59, 130, 246, 0.3)"
+                  }}
                   whileTap={{ scale: 0.98 }}
                 >
-                  <span>View Projects</span>
-                  <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <span className="absolute inset-0 w-full h-full bg-blue-900/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl" />
+                  <span className="relative z-10">View Projects</span>
+                  <svg className="w-4 h-4 relative z-10 group-hover:translate-x-1 transition-transform duration-300" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M13 7L18 12M18 12L13 17M18 12H6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                   </svg>
+                  <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-blue-400 group-hover:w-full transition-all duration-300 ease-out" />
                 </motion.a>
               </motion.div>
             </motion.div>
@@ -290,7 +314,7 @@ const HeroSection = () => {
           animate={{ opacity: 1 }}
           transition={{ delay: 2 }}
         >
-          <span className="text-gray-500 text-sm mb-2">Scroll to explore</span>
+          <span className="text-gray-500 text-sm mb-2 font-inter">Scroll to explore</span>
           <motion.div
             className="w-6 h-10 border-2 border-gray-500 rounded-full flex justify-center p-1"
             initial={{ y: 0 }}
