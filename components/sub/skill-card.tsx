@@ -47,7 +47,8 @@ const SkillCard = ({ title, technologies, index }: SkillCardProps) => {
       className="glass-effect rounded-2xl p-6 shadow-2xl backdrop-blur-md border border-gray-700/50 
                  hover:border-transparent transition-all duration-500 group relative
                  hover:bg-gradient-to-br from-gray-900/80 to-gray-800/80
-                 hover:shadow-[0_0_30px_rgba(59,130,246,0.3)]"
+                 hover:shadow-[0_0_30px_rgba(59,130,246,0.3)]
+                 will-change-transform"
       whileHover={{
         y: -5,
         transition: { duration: 0.3, ease: "easeOut" }
@@ -149,9 +150,10 @@ const SkillCard = ({ title, technologies, index }: SkillCardProps) => {
           backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
         }}
         transition={{
-          duration: 10,
+          duration: 15,
           repeat: Infinity,
-          ease: "linear"
+          ease: "linear",
+          repeatDelay: 0
         }}
       />
 
@@ -195,62 +197,38 @@ const SkillCard = ({ title, technologies, index }: SkillCardProps) => {
             <motion.div
               className="skill-icon-container w-10 h-10 flex items-center justify-center
                          bg-gray-800/50 rounded-lg border border-gray-700/50
-                         hover:border-blue-500/50 hover:bg-gray-700/50"
+                         hover:border-blue-500/50 hover:bg-gray-700/50
+                         will-change-transform"
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ 
                 opacity: 1, 
                 scale: 1,
-                transition: { delay: index * 0.05 + i * 0.05 }
+                transition: { delay: 0.1 + i * 0.03 }
               }}
               whileHover={{
-                scale: 1.15,
-                rotate: [0, -5, 5, 0],
+                scale: 1.1,
                 transition: {
-                  duration: 0.3,
-                  rotate: {
-                    duration: 0.5,
-                    ease: "easeInOut",
-                  }
+                  duration: 0.2,
+                  ease: "easeOut"
                 }
               }}
             >
               <SkillIcon 
                 name={tech} 
                 size={24} 
-                className="text-gray-300 group-hover:text-blue-300 transition-all duration-300
-                          filter drop-shadow-[0_0_8px_rgba(59,130,246,0.3)]" 
+                className="text-gray-300 group-hover:text-blue-300 transition-colors duration-300" 
               />
             </motion.div>
           </Tooltip>
         ))}
       </div>
 
-      {/* Enhanced decorative elements */}
-      <motion.div 
-        className="absolute -z-10 right-3 bottom-3 w-16 h-16 rounded-full bg-blue-500/10"
-        animate={{
-          scale: [1, 1.2, 1],
-          opacity: [0.3, 0.6, 0.3],
-          rotate: [0, 180, 360],
-        }}
-        transition={{
-          duration: 8,
-          repeat: Infinity,
-          ease: "linear"
-        }}
+      {/* Simplified decorative elements */}
+      <div 
+        className="absolute -z-10 right-3 bottom-3 w-16 h-16 rounded-full bg-blue-500/5 opacity-30"
       />
-      <motion.div 
-        className="absolute -z-10 left-3 top-3 w-12 h-12 rounded-full bg-purple-500/10"
-        animate={{
-          scale: [1.2, 1, 1.2],
-          opacity: [0.2, 0.5, 0.2],
-          rotate: [360, 180, 0],
-        }}
-        transition={{
-          duration: 6,
-          repeat: Infinity,
-          ease: "linear"
-        }}
+      <div 
+        className="absolute -z-10 left-3 top-3 w-12 h-12 rounded-full bg-purple-500/5 opacity-20"
       />
     </motion.div>
   );
