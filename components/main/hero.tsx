@@ -96,7 +96,7 @@ const HeroSection = () => {
       </div>
       
       <div className="container mx-auto py-12 md:py-20 z-10">
-        <div className="flex flex-col lg:flex-row items-center gap-12 md:gap-16 lg:gap-24">
+        <div className="flex flex-col lg:flex-row items-center gap-12 md:gap-16 lg:gap-24 mb-16 lg:mb-24">
           {/* Left column - Text content */}
           <div className="w-full lg:w-3/5">
             <motion.div 
@@ -113,23 +113,23 @@ const HeroSection = () => {
               }}
             >
               <motion.h1 
-                className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white font-playfair"
+                className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl xl:text-6xl font-bold text-white font-playfair"
                 variants={textVariant(0.1)}
               >
                 Hi, I&apos;m {PERSONAL_INFO.name} <br className="hidden sm:block" />
                 <motion.div 
-                  className="mt-4 md:mt-6 inline-block relative"
+                  className="mt-4 md:mt-6 inline-block relative max-w-full"
                   initial={{ y: 10, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
                   transition={{ duration: 0.7, delay: 0.3 }}
                 >
-                  <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-500 via-indigo-400 to-blue-600 relative z-10 font-bold">
+                  <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-500 via-indigo-400 to-blue-600 relative z-10 font-bold whitespace-normal break-words">
                     Full Stack Developer
                   </span>
                   
                   {/* Animated underline */}
                   <motion.span 
-                    className="absolute -bottom-1 left-0 h-[3px] bg-gradient-to-r from-blue-600 via-indigo-500 to-blue-400 rounded-full"
+                    className="absolute -bottom-1 left-0 h-[3px] bg-gradient-to-r from-blue-600 via-indigo-500 to-blue-400 rounded-full w-full"
                     initial={{ width: "0%" }}
                     animate={{ width: "100%" }}
                     transition={{ duration: 1, delay: 0.5 }}
@@ -451,9 +451,9 @@ const HeroSection = () => {
           </motion.div>
         </div>
         
-        {/* Scroll indicator - hidden on small screens */}
+        {/* Scroll indicator - hidden on small and medium screens */}
         <motion.div 
-          className="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex flex-col items-center hidden md:flex"
+          className="absolute bottom-4 lg:bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center hidden lg:flex"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 2 }}
