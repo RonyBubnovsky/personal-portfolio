@@ -31,8 +31,8 @@ const SkillsSection = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 0.8 }}
               transition={{ 
-                delay: i * 0.1, 
-                duration: 1, 
+                delay: i * 0.2, 
+                duration: 2, 
                 repeat: Infinity, 
                 repeatType: "reverse" 
               }}
@@ -51,8 +51,8 @@ const SkillsSection = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 0.8 }}
               transition={{ 
-                delay: i * 0.1, 
-                duration: 1, 
+                delay: i * 0.2, 
+                duration: 2, 
                 repeat: Infinity, 
                 repeatType: "reverse" 
               }}
