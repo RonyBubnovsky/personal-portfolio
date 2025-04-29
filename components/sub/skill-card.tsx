@@ -20,18 +20,18 @@ const SkillCard = ({ title, technologies, index }: SkillCardProps) => {
   
   // Array of modern, vibrant colors
   const colors = [
-    'rgba(99, 102, 241, 0.8)',    // Indigo
-    'rgba(16, 185, 129, 0.8)',    // Emerald
-    'rgba(236, 72, 153, 0.8)',    // Pink
-    'rgba(245, 158, 11, 0.8)',    // Amber
-    'rgba(139, 92, 246, 0.8)',    // Purple
-    'rgba(14, 165, 233, 0.8)',    // Sky
-    'rgba(249, 115, 22, 0.8)',    // Orange
-    'rgba(168, 85, 247, 0.8)',    // Purple
-    'rgba(59, 130, 246, 0.8)',    // Blue
-    'rgba(234, 88, 12, 0.8)',     // Orange
-    'rgba(20, 184, 166, 0.8)',    // Teal
-    'rgba(217, 70, 239, 0.8)',    // Fuchsia
+    'rgba(147, 197, 253, 0.6)',    // Soft Blue
+    'rgba(167, 139, 250, 0.6)',    // Soft Purple
+    'rgba(165, 243, 252, 0.6)',    // Soft Cyan
+    'rgba(192, 132, 252, 0.6)',    // Soft Violet
+    'rgba(134, 239, 172, 0.6)',    // Soft Emerald
+    'rgba(125, 211, 252, 0.6)',    // Soft Sky
+    'rgba(186, 230, 253, 0.6)',    // Light Blue
+    'rgba(199, 210, 254, 0.6)',    // Soft Indigo
+    'rgba(153, 246, 228, 0.6)',    // Soft Teal
+    'rgba(196, 181, 253, 0.6)',    // Light Purple
+    'rgba(141, 162, 251, 0.6)',    // Cool Blue
+    'rgba(172, 224, 249, 0.6)',    // Ice Blue
   ];
 
   const lineColor = colors[index % colors.length];
