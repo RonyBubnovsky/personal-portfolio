@@ -5,6 +5,7 @@ import { fadeIn } from "@/lib/motion";
 import { SkillIcon } from "@/lib/skill-icons";
 import { getCategoryIcon } from "@/constants/skill-icons";
 import Tooltip from "./tooltip";
+import { useState, useRef } from "react";
 
 interface SkillCardProps {
   title: string;
@@ -14,19 +15,78 @@ interface SkillCardProps {
 
 const SkillCard = ({ title, technologies, index }: SkillCardProps) => {
   const CategoryIcon = getCategoryIcon(title);
+  const cardRef = useRef<HTMLDivElement>(null);
+  const [isHovered, setIsHovered] = useState(false);
+  
+  // Array of modern, vibrant colors
+  const colors = [
+    'rgba(99, 102, 241, 0.8)',    // Indigo
+    'rgba(16, 185, 129, 0.8)',    // Emerald
+    'rgba(236, 72, 153, 0.8)',    // Pink
+    'rgba(245, 158, 11, 0.8)',    // Amber
+    'rgba(139, 92, 246, 0.8)',    // Purple
+    'rgba(14, 165, 233, 0.8)',    // Sky
+    'rgba(249, 115, 22, 0.8)',    // Orange
+    'rgba(168, 85, 247, 0.8)',    // Purple
+    'rgba(59, 130, 246, 0.8)',    // Blue
+    'rgba(234, 88, 12, 0.8)',     // Orange
+    'rgba(20, 184, 166, 0.8)',    // Teal
+    'rgba(217, 70, 239, 0.8)',    // Fuchsia
+  ];
+
+  const lineColor = colors[index % colors.length];
+  
+  // Generate random values for animation
+  const randomStart = useRef(-Math.floor(Math.random() * 1000));
+  const randomDelay = useRef(-Math.floor(Math.random() * 10));
   
   return (
     <motion.div
+      ref={cardRef}
       variants={fadeIn("up", index * 0.1)}
       className="glass-effect rounded-2xl p-6 shadow-2xl backdrop-blur-md border border-gray-700/50 
-                 hover:border-blue-500/50 transition-all duration-500 group relative
+                 hover:border-transparent transition-all duration-500 group relative
                  hover:bg-gradient-to-br from-gray-900/80 to-gray-800/80
                  hover:shadow-[0_0_30px_rgba(59,130,246,0.3)]"
       whileHover={{
         y: -5,
         transition: { duration: 0.3, ease: "easeOut" }
       }}
+      onHoverStart={() => setIsHovered(true)}
+      onHoverEnd={() => setIsHovered(false)}
     >
+      {/* SVG Border Animation */}
+      <svg 
+        className="absolute inset-0 w-full h-full pointer-events-none" 
+        style={{ 
+          zIndex: 5,
+          filter: isHovered ? `drop-shadow(0 0 8px ${lineColor}) blur(1px)` : 'blur(1px)',
+          transition: "filter 0.5s ease"
+        }}
+      >
+        {/* Single continuous border line */}
+        <rect 
+          className="w-full h-full" 
+          x="0" 
+          y="0" 
+          width="100%" 
+          height="100%" 
+          rx="16" 
+          ry="16"
+          fill="none" 
+          stroke={lineColor}
+          strokeWidth="2.5"
+          pathLength="100"
+          strokeDasharray="100"
+          strokeDashoffset={randomStart.current}
+          style={{
+            animation: `dashOffset ${isHovered ? '50s' : '100s'} linear ${randomDelay.current}s infinite`,
+            transition: "all 0.5s ease",
+            filter: `drop-shadow(0 0 2px ${lineColor})`
+          }}
+        />
+      </svg>
+      
       {/* Animated background gradient */}
       <motion.div 
         className="absolute inset-0 rounded-2xl bg-gradient-to-r from-blue-500/10 via-purple-500/10 to-pink-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
