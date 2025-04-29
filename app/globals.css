@@ -102,6 +102,25 @@ body {
   animation: glow 2s ease-in-out infinite alternate;
 }
 
+/* Animated border animations */
+@keyframes dashOffset {
+  from {
+    stroke-dashoffset: 0;
+  }
+  to {
+    stroke-dashoffset: -1000;
+  }
+}
+
+@keyframes dashOffset-reverse {
+  from {
+    stroke-dashoffset: 0;
+  }
+  to {
+    stroke-dashoffset: 1000;
+  }
+}
+
 @keyframes fadeIn {
   0% { opacity: 0; }
   100% { opacity: 1; }
