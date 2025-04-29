@@ -294,11 +294,6 @@ const HeroSection = () => {
             transition={{ duration: 0.8, delay: 0.5 }}
           >
             <div className="relative max-w-[280px] md:max-w-[320px]">
-              {/* Glowing background effect */}
-              <div className="absolute inset-0 -z-10 animate-pulse">
-                <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-full blur-3xl" />
-              </div>
-              
               {/* Profile container */}
               <div 
                 className="w-48 h-48 sm:w-56 sm:h-56 md:w-64 md:h-64 lg:w-72 lg:h-72 relative rounded-full border-2 border-gray-800 p-2 bg-gray-900/50 backdrop-blur-sm"
