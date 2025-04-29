@@ -60,11 +60,11 @@ const SkillCard = ({ title, technologies, index }: SkillCardProps) => {
         className="absolute inset-0 w-full h-full pointer-events-none" 
         style={{ 
           zIndex: 5,
-          filter: isHovered ? `drop-shadow(0 0 8px ${lineColor}) blur(1px)` : 'blur(1px)',
+          filter: isHovered ? `drop-shadow(0 0 12px ${lineColor}) blur(0.5px)` : 'none',
           transition: "filter 0.5s ease"
         }}
       >
-        {/* Single continuous border line */}
+        {/* Thin continuous border line */}
         <rect 
           className="w-full h-full" 
           x="0" 
@@ -75,17 +75,72 @@ const SkillCard = ({ title, technologies, index }: SkillCardProps) => {
           ry="16"
           fill="none" 
           stroke={lineColor}
-          strokeWidth="2.5"
+          strokeWidth="1"
           pathLength="100"
           strokeDasharray="100"
           strokeDashoffset={randomStart.current}
           style={{
-            animation: `dashOffset ${isHovered ? '50s' : '100s'} linear ${randomDelay.current}s infinite`,
-            transition: "all 0.5s ease",
-            filter: `drop-shadow(0 0 2px ${lineColor})`
+            animation: `dashOffset ${isHovered ? '30s' : '60s'} linear ${randomDelay.current}s infinite`,
+            transition: "all 0.3s ease",
+            filter: isHovered ? `drop-shadow(0 0 3px ${lineColor})` : 'none'
           }}
         />
+        
+        {/* Additional decorative corner accents */}
+        {isHovered && (
+          <>
+            <circle 
+              cx="16" 
+              cy="16" 
+              r="2" 
+              fill={lineColor} 
+              style={{
+                filter: `drop-shadow(0 0 2px ${lineColor})`,
+                animation: "pulse 2s infinite"
+              }}
+            />
+            <circle 
+              cx="calc(100% - 16)" 
+              cy="16" 
+              r="2" 
+              fill={lineColor}
+              style={{
+                filter: `drop-shadow(0 0 2px ${lineColor})`,
+                animation: "pulse 2s infinite 0.5s"
+              }}
+            />
+            <circle 
+              cx="16" 
+              cy="calc(100% - 16)" 
+              r="2" 
+              fill={lineColor}
+              style={{
+                filter: `drop-shadow(0 0 2px ${lineColor})`,
+                animation: "pulse 2s infinite 1s"
+              }}
+            />
+            <circle 
+              cx="calc(100% - 16)" 
+              cy="calc(100% - 16)" 
+              r="2" 
+              fill={lineColor}
+              style={{
+                filter: `drop-shadow(0 0 2px ${lineColor})`,
+                animation: "pulse 2s infinite 1.5s"
+              }}
+            />
+          </>
+        )}
       </svg>
+
+      {/* Add keyframes for pulse animation */}
+      <style jsx>{`
+        @keyframes pulse {
+          0% { opacity: 0.4; transform: scale(1); }
+          50% { opacity: 1; transform: scale(1.5); }
+          100% { opacity: 0.4; transform: scale(1); }
+        }
+      `}</style>
       
       {/* Animated background gradient */}
       <motion.div 
