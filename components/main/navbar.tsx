@@ -159,20 +159,18 @@ const Navbar = () => {
                     handleNavClick(e, sectionId);
                   }}
                   className={cn(
-                    "text-gray-300 font-medium hover:text-white transition-colors duration-300 py-2 px-1",
+                    "text-gray-300 font-medium hover:text-white transition-colors duration-300 py-2 px-1 relative group",
                     isActive && "text-white"
                   )}
                 >
-                  <span className="relative group">
-                    {link.name}
-                    <span 
-                      className={cn(
-                        "absolute -bottom-1 left-0 h-[2px] bg-blue-500 transition-all duration-300 ease-out rounded-full opacity-0 w-0",
-                        "group-hover:w-full group-hover:opacity-100",
-                        isActive && "w-full opacity-100"
-                      )}
-                    />
-                  </span>
+                  {link.name}
+                  <span 
+                    className={cn(
+                      "absolute bottom-0 left-0 h-[2px] w-0 bg-blue-500 transition-all duration-300 ease-out rounded-full opacity-0",
+                      "group-hover:w-full group-hover:opacity-100",
+                      isActive && "w-full opacity-100"
+                    )}
+                  />
                 </Link>
               </li>
             );
@@ -233,7 +231,7 @@ const Navbar = () => {
                         {link.name}
                         <span 
                           className={cn(
-                            "absolute -bottom-1 left-0 h-[2px] bg-blue-500 transition-all duration-300 ease-out rounded-full opacity-0 w-0",
+                            "absolute bottom-0 left-0 h-[2px] w-0 bg-blue-500 transition-all duration-300 ease-out rounded-full opacity-0",
                             "group-hover:w-full group-hover:opacity-100",
                             isActive && "w-full opacity-100"
                           )}
