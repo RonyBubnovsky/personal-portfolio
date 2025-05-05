@@ -89,7 +89,7 @@ export const PROJECTS = [
       "/projects/taskManager1.png"
     ],
     link: "#",
-    github: "https://github.com/RonyBubnovsky"
+    github: "https://github.com/RonyBubnovsky/DailyTasksManagement-MicroServices"
   },
   {
     title: "Next.js Chess App – Full-Stack Chess with AI",
