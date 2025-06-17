@@ -291,8 +291,17 @@ const ContactSection = () => {
                   initial={{ opacity: 0, y: 20 }}
                   animate={inView ? { opacity: 1, y: 0 } : {}}
                   transition={{ duration: 0.4, delay: 0.6 + (index * 0.1) }}
-                  whileHover={{ y: -5, x: 0 }}
-                  className="group flex items-center gap-2 p-4 rounded-xl border border-gray-700/50 bg-gray-800/50 hover:border-blue-500/30 transition-all duration-300"
+                  whileTap={{ scale: 0.98 }}
+                  whileHover={{
+                    y: -5, 
+                    x: 0,
+                    transition: {
+                      type: "tween",
+                      duration: 0.15,
+                      ease: "easeOut"
+                    }
+                  }}
+                  className="group flex items-center gap-2 p-4 rounded-xl border border-gray-700/50 bg-gray-800/50 hover:border-blue-500/30 transition-all duration-150"
                 >
                   <div className={`p-2.5 rounded-full bg-gray-700/50 ${social.bgHover} transition-colors duration-300`}>
                     <span className={`text-gray-300 ${social.color} transition-colors duration-300`}>
