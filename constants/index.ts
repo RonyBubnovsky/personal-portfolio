@@ -80,16 +80,21 @@ export const PROJECTS = [
     github: "https://github.com/Bar-Levi/CareerAgent"
   },
   {
-    title: "Task Management System – Microservices-Based",
-    description: "Full-stack task management system using React and Flask (Python) following microservices architecture. Containerized with Docker and orchestrated with Docker Compose.",
-    technologies: ["React", "Python", "Flask", "Docker", "Cypress", "Pytest", "Microservices"],
-    duration: "January 2025",
+    title: "CrowdCapture – Shared Event Album Platform",
+    description: "A responsive full-stack web application for creating shared photo albums for celebratory and business events. Guests can scan QR codes to access event pages and upload media. Built with React + Vite frontend and Node.js backend, utilizing AWS services for scalable media storage and processing. Deployed on AWS Lightsail servers.",
+    technologies: ["React", "Vite", "Node.js", "MongoDB", "AWS S3", "AWS SQS", "AWS Lambda", "Docker", "AWS ECR", "AWS Lightsail"],
+    duration: "2025",
     images: [
-      "/projects/taskManager.png",
-      "/projects/taskManager1.png"
+      "/projects/cc1.png",
+      "/projects/cc2.png",
+      "/projects/cc3.png",
+      "/projects/cc4.png",
+      "/projects/cc5.png",
+      "/projects/cc6.png",
+      "/projects/cc7.png"
     ],
-    link: "#",
-    github: "https://github.com/RonyBubnovsky/DailyTasksManagement-MicroServices"
+    link: "https://crowdcapture.co.il",
+    github: ""
   },
   {
     title: "Next.js Chess App – Full-Stack Chess with AI",

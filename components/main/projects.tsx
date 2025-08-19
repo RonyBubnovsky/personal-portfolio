@@ -6,13 +6,13 @@ import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { FaGithub, FaExternalLinkAlt, FaAws, FaJava, FaCheck, FaRobot } from "react-icons/fa";
 import ProjectImageCarousel from "../sub/ProjectImageCarousel";
-import { 
-  SiReact, SiNextdotjs, SiTypescript, SiJavascript, SiTailwindcss, 
-  SiNodedotjs, SiExpress, SiMongodb, SiFirebase, SiCircleci, 
+import {
+  SiReact, SiNextdotjs, SiTypescript, SiJavascript, SiTailwindcss,
+  SiNodedotjs, SiExpress, SiMongodb, SiFirebase, SiCircleci,
   SiCypress, SiPython, SiFlask, SiDocker, SiClerk, SiRedis,
-  SiHtml5, SiCss3, SiJest, SiRender, 
-  SiCloudinary, SiPostgresql, SiGithubactions, SiMocha, 
-  SiCplusplus, SiC, SiFastapi, SiJunit5,
+  SiHtml5, SiCss3, SiJest, SiRender,
+  SiCloudinary, SiPostgresql, SiGithubactions, SiMocha,
+  SiCplusplus, SiC, SiFastapi, SiJunit5, SiVite,
 } from "react-icons/si";
 
 interface Project {
@@ -68,6 +68,12 @@ const techIcons: { [key: string]: React.ReactElement } = {
   "k6": <FaCheck className="text-white" />,
   "JMeter": <FaCheck className="text-white" />,
   "Google Generative API": <FaRobot className="text-[#4285F4]" />,
+  "Vite": <SiVite className="text-[#646CFF]" />,
+  "AWS S3": <FaAws className="text-[#FF9900]" />,
+  "AWS SQS": <FaAws className="text-[#FF9900]" />,
+  "AWS Lambda": <FaAws className="text-[#FF9900]" />,
+  "AWS ECR": <FaAws className="text-[#FF9900]" />,
+  "AWS Lightsail": <FaAws className="text-[#FF9900]" />,
 };
 
 const ProjectsSection = () => {
@@ -177,7 +183,7 @@ const ProjectsSection = () => {
                   </div>
 
                   <div className="flex gap-6">
-                    {project.github && (
+                    {project.github && project.github !== "" && (
                       typeof project.github === 'object' ? (
                         <>
                           <a
