@@ -81,7 +81,7 @@ export const PROJECTS = [
   },
   {
     title: "CrowdCapture – Shared Event Album Platform",
-    description: "A responsive full-stack web application for creating shared photo albums for celebratory and business events. Guests can scan QR codes to access event pages and upload media. Built with React + Vite frontend and Node.js backend, utilizing AWS services for scalable media storage and processing. Deployed on AWS Lightsail servers.",
+    description: "A mobile-first web application designed for creating shared photo albums for celebratory and business events. Optimized for smartphone usage at events, guests can scan QR codes to access event pages and upload media. Built with React + Vite frontend and Node.js backend, utilizing AWS services for scalable media storage and processing. Deployed on AWS Lightsail servers.",
     technologies: ["React", "Vite", "Node.js", "MongoDB", "AWS S3", "AWS SQS", "AWS Lambda", "Docker", "AWS ECR", "AWS Lightsail"],
     duration: "2025",
     images: [
