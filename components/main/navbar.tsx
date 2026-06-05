@@ -59,6 +59,11 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Keep URL hash in sync with active section while scrolling
+  useEffect(() => {
+    window.history.replaceState(null, '', `#${activeSection}`);
+  }, [activeSection]);
+
   // Close menu when clicking outside
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {

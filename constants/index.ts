@@ -115,15 +115,18 @@ export const PROJECTS = [
 
 export const WORK_EXPERIENCE = [
   {
-    title: "Logistics Specialist & Electronics Administrator",
-    company: "Israel Defense Forces",
-    duration: "October 2017 – June 2020",
-    description: "Managed 60+ computing stations, troubleshooting hardware/software issues. Utilized Oracle ERP to optimize system workflows and inventory tracking. Collaborated with defense tech contractors on system integrations. Awarded the Colonel Excellence Award for outstanding performance."
+    title: "Software Engineer & Full Stack Developer",
+    company: "Nexus Payments",
+    duration: "April 2026 – Present",
+    image: "/images/nexus.png",
+    description: "Building a full product from scratch, moving a legacy Wix site (~80,000 users) to a modern React and TypeScript web app. Handling everything end-to-end: Node.js REST APIs, PostgreSQL and MongoDB with Prisma, Docker deployment, authentication, RBAC, digital wallets, a loyalty program, third-party payment processing, and SMS verification. Using AI tools to ship faster and stay on top of quality as a solo engineer. Breaking down product specs into Agile tasks and running my own sprint workflow."
   },
   {
     title: "Student Tutor",
     company: "Perach",
-    duration: "October 2022 - Present",
+    duration: "October 2022 – July 2025",
+    image: "/images/perach.png",
+    isVoluntary: true,
     description: "Provided programming and academic support to students throughout the semester, helping improve understanding and problem-solving skills."
   }
 ];
@@ -132,8 +135,9 @@ export const EDUCATION = [
   {
     degree: "B.Sc. in Software Engineering",
     institution: "SCE Academic College of Engineering",
-    duration: "Expected July 2025",
-    gpa: "91.5",
+    duration: "July 2025",
+    gpa: "92",
+    image: "/images/sce.jpg",
     description: "Focusing on software engineering principles, algorithms, data structures, and modern development methodologies."
   }
 ];
