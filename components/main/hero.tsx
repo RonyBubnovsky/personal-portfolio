@@ -1,7 +1,7 @@
 "use client";
 import { PERSONAL_INFO, SOCIAL_LINKS } from "@/constants";
 import { motion } from "framer-motion";
-import { FaGithub, FaLinkedin, FaReact, FaNodeJs, FaUser, FaFileAlt } from "react-icons/fa";
+import { FaGithub, FaLinkedin, FaReact, FaNodeJs, FaFileAlt } from "react-icons/fa";
 import { SiJavascript, SiTypescript, SiExpress, SiMongodb, SiTailwindcss } from "react-icons/si";
 import { useState, useEffect } from "react";
 import { textVariant, fadeIn } from "@/lib/motion";
@@ -293,7 +293,7 @@ const HeroSection = () => {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.5 }}
           >
-            <div className="relative max-w-[280px] md:max-w-[320px]">
+            <div className="relative w-[280px] flex justify-center sm:block sm:w-auto sm:max-w-[320px]">
               {/* Profile container */}
               <div 
                 className="w-48 h-48 sm:w-56 sm:h-56 md:w-64 md:h-64 lg:w-72 lg:h-72 relative rounded-full border-2 border-gray-800 p-2 bg-gray-900/50 backdrop-blur-sm"
@@ -340,21 +340,6 @@ const HeroSection = () => {
                           transitionDelay: '0.1s'
                         }}
                       >
-                        <div className="bg-blue-500/20 p-1.5 rounded-full flex-shrink-0">
-                          <FaUser className="text-blue-400 text-xs sm:text-sm" />
-                        </div>
-                        <span className="font-medium text-xs sm:text-sm">{PERSONAL_INFO.name}</span>
-                      </div>
-                      
-                      <div 
-                        className="flex items-center gap-2 text-white"
-                        style={{ 
-                          transform: isProfileHovered ? 'translateX(0)' : 'translateX(-10px)',
-                          opacity: isProfileHovered ? 1 : 0,
-                          transition: 'transform 0.3s, opacity 0.3s',
-                          transitionDelay: '0.2s'
-                        }}
-                      >
                         <div className="bg-green-500/20 p-1.5 rounded-full flex-shrink-0">
                           <FaFileAlt className="text-green-400 text-xs sm:text-sm" />
                         </div>
@@ -363,14 +348,14 @@ const HeroSection = () => {
                           download
                           className="font-medium text-xs sm:text-sm hover:text-green-400 transition-colors"
                         >
-                          Download my CV
+                          Download CV
                         </a>
                       </div>
                     </div>
                   </div>
                 </div>
                 
-                {/* Background particles effect on hover - visible on all devices */}
+                {/* Background particles effect on hover */}
                 {isProfileHovered && (
                   <div className="absolute inset-0 -z-5">
                     {[...Array(10)].map((_, i) => (
@@ -400,82 +385,62 @@ const HeroSection = () => {
                     ))}
                   </div>
                 )}
-          
-                {/* Floating code snippets - now visible on all screen sizes with responsive positioning */}
-                <motion.div 
-                  className="absolute bottom-[-2rem] md:bottom-[-3rem] left-[-3rem] md:left-[-5rem] lg:left-[-6rem] p-2 sm:p-3 bg-gray-800/90 backdrop-blur-sm rounded-lg border border-gray-700/50 shadow-xl w-24 sm:w-28 text-[8px] sm:text-xs font-mono z-20"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 1.2 }}
-                >
-                  <div className="text-gray-400">
-                    <span className="text-blue-400">const</span> <span className="text-green-400">developer</span> = <span className="text-yellow-500">true</span>;
-                  </div>
-                </motion.div>
-                
-                <motion.div 
-                  className="absolute top-[-2rem] md:top-[-3rem] left-[-2rem] md:left-[-3rem] lg:left-[-4rem] p-2 sm:p-3 bg-gray-800/90 backdrop-blur-sm rounded-lg border border-gray-700/50 shadow-xl w-20 sm:w-24 text-[8px] sm:text-xs font-mono z-20"
-                  initial={{ opacity: 0, y: -20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 1.4 }}
-                >
-                  <div className="text-gray-400">
-                    <span className="text-purple-400">function</span> <span className="text-green-400">code</span>() &#123;
-                  </div>
-                </motion.div>
-
-                {/* New floating code snippets on right side */}
-                <motion.div 
-                  className="absolute top-[-2rem] md:top-[-3rem] right-[-2rem] md:right-[-3rem] lg:right-[-4rem] p-2 sm:p-3 bg-gray-800/90 backdrop-blur-sm rounded-lg border border-gray-700/50 shadow-xl w-24 sm:w-28 text-[8px] sm:text-xs font-mono z-20"
-                  initial={{ opacity: 0, y: -20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 1.6 }}
-                >
-                  <div className="text-gray-400">
-                    <span className="text-pink-400">import</span> &#123; <span className="text-green-400">creativity</span> &#125;
-                  </div>
-                </motion.div>
-                
-                <motion.div 
-                  className="absolute bottom-[-2rem] md:bottom-[-3rem] right-[-3rem] md:right-[-5rem] lg:right-[-6rem] p-2 sm:p-3 bg-gray-800/90 backdrop-blur-sm rounded-lg border border-gray-700/50 shadow-xl w-28 sm:w-32 text-[8px] sm:text-xs font-mono z-20"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 1.8 }}
-                >
-                  <div className="text-gray-400">
-                    <span className="text-orange-400">return</span> <span className="text-blue-400">&lt;</span><span className="text-green-400">Solution</span><span className="text-blue-400">/&gt;</span>
-                  </div>
-                </motion.div>
               </div>
+
+              {/* Floating code snippets — positioned relative to outer wrapper, not the circle */}
+              {/* top-left: function code() — above circle, left side */}
+              <motion.div
+                className="absolute top-[-1.5rem] left-0 sm:top-[-3rem] sm:left-[-3rem] lg:left-[-4rem] p-1.5 sm:p-3 bg-gray-800/90 backdrop-blur-sm rounded-lg border border-gray-700/50 shadow-xl w-[5.5rem] sm:w-24 text-[8px] sm:text-xs font-mono z-20"
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 1.4 }}
+              >
+                <div className="text-gray-400">
+                  <span className="text-purple-400">function</span> <span className="text-green-400">code</span>() &#123;
+                </div>
+              </motion.div>
+
+              {/* top-right: import creativity — above circle, right side */}
+              <motion.div
+                className="absolute top-[-1.5rem] right-0 sm:top-[-3rem] sm:right-[-3rem] lg:right-[-4rem] p-1.5 sm:p-3 bg-gray-800/90 backdrop-blur-sm rounded-lg border border-gray-700/50 shadow-xl w-[5.5rem] sm:w-28 text-[8px] sm:text-xs font-mono z-20"
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 1.6 }}
+              >
+                <div className="text-gray-400">
+                  <span className="text-pink-400">import</span> &#123; <span className="text-green-400">creativity</span> &#125;
+                </div>
+              </motion.div>
+
+              {/* bottom-left: const developer — below circle, left side */}
+              <motion.div
+                className="absolute bottom-[-1.5rem] left-0 sm:bottom-[-3rem] sm:left-[-5rem] lg:left-[-6rem] p-1.5 sm:p-3 bg-gray-800/90 backdrop-blur-sm rounded-lg border border-gray-700/50 shadow-xl w-[5.5rem] sm:w-28 text-[8px] sm:text-xs font-mono z-20"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 1.2 }}
+              >
+                <div className="text-gray-400">
+                  <span className="text-blue-400">const</span> <span className="text-green-400">developer</span> = <span className="text-yellow-500">true</span>;
+                </div>
+              </motion.div>
+
+              {/* bottom-right: return Solution — below circle, right side */}
+              <motion.div
+                className="absolute bottom-[-1.5rem] right-0 sm:bottom-[-3rem] sm:right-[-5rem] lg:right-[-6rem] p-1.5 sm:p-3 bg-gray-800/90 backdrop-blur-sm rounded-lg border border-gray-700/50 shadow-xl w-[5.5rem] sm:w-32 text-[8px] sm:text-xs font-mono z-20"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 1.8 }}
+              >
+                <div className="text-gray-400">
+                  <span className="text-orange-400">return</span> <span className="text-blue-400">&lt;</span><span className="text-green-400">Solution</span><span className="text-blue-400">/&gt;</span>
+                </div>
+              </motion.div>
             </div>
           </motion.div>
+
         </div>
         
-        {/* Scroll indicator - hidden on small and medium screens */}
-        <motion.div 
-          className="absolute bottom-4 lg:bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center hidden lg:flex"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 2 }}
-        >
-          <span className="text-gray-500 text-sm mb-2 font-inter">Scroll to explore</span>
-          <motion.div
-            className="w-6 h-10 border-2 border-gray-500 rounded-full flex justify-center p-1"
-            initial={{ y: 0 }}
-          >
-            <motion.div 
-              className="w-1.5 h-1.5 bg-blue-500 rounded-full"
-              animate={{ 
-                y: [0, 12, 0],
-              }}
-              transition={{
-                duration: 1.5,
-                repeat: Infinity,
-                repeatType: "loop",
-              }}
-            />
-          </motion.div>
-        </motion.div>
+
       </div>
     </section>
   );

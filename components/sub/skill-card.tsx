@@ -90,46 +90,28 @@ const SkillCard = ({ title, technologies, index }: SkillCardProps) => {
         {/* Additional decorative corner accents */}
         {isHovered && (
           <>
-            <circle 
-              cx="16" 
-              cy="16" 
-              r="2" 
-              fill={lineColor} 
-              style={{
-                filter: `drop-shadow(0 0 2px ${lineColor})`,
-                animation: "pulse 2s infinite"
-              }}
+            {/* top-left */}
+            <circle cx="16" cy="16" r="2" fill={lineColor}
+              style={{ filter: `drop-shadow(0 0 2px ${lineColor})`, animation: "pulse 2s infinite" }}
             />
-            <circle 
-              cx="calc(100% - 16)" 
-              cy="16" 
-              r="2" 
-              fill={lineColor}
-              style={{
-                filter: `drop-shadow(0 0 2px ${lineColor})`,
-                animation: "pulse 2s infinite 0.5s"
-              }}
-            />
-            <circle 
-              cx="16" 
-              cy="calc(100% - 16)" 
-              r="2" 
-              fill={lineColor}
-              style={{
-                filter: `drop-shadow(0 0 2px ${lineColor})`,
-                animation: "pulse 2s infinite 1s"
-              }}
-            />
-            <circle 
-              cx="calc(100% - 16)" 
-              cy="calc(100% - 16)" 
-              r="2" 
-              fill={lineColor}
-              style={{
-                filter: `drop-shadow(0 0 2px ${lineColor})`,
-                animation: "pulse 2s infinite 1.5s"
-              }}
-            />
+            {/* top-right: anchor at right edge via SVG % */}
+            <g transform="translate(-16, 16)">
+              <circle cx="100%" cy="0" r="2" fill={lineColor}
+                style={{ filter: `drop-shadow(0 0 2px ${lineColor})`, animation: "pulse 2s infinite 0.5s" }}
+              />
+            </g>
+            {/* bottom-left: anchor at bottom edge via SVG % */}
+            <g transform="translate(16, -16)">
+              <circle cx="0" cy="100%" r="2" fill={lineColor}
+                style={{ filter: `drop-shadow(0 0 2px ${lineColor})`, animation: "pulse 2s infinite 1s" }}
+              />
+            </g>
+            {/* bottom-right */}
+            <g transform="translate(-16, -16)">
+              <circle cx="100%" cy="100%" r="2" fill={lineColor}
+                style={{ filter: `drop-shadow(0 0 2px ${lineColor})`, animation: "pulse 2s infinite 1.5s" }}
+              />
+            </g>
           </>
         )}
       </svg>

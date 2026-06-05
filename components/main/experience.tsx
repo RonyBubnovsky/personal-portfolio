@@ -7,6 +7,7 @@ import { useInView } from "react-intersection-observer";
 import { useRef, useState } from "react";
 import { HiOutlineBriefcase, HiOutlineAcademicCap } from "react-icons/hi";
 import { RiArrowRightLine } from "react-icons/ri";
+import Image from "next/image";
 
 // Define types for work and education items
 type WorkExperienceItem = {
@@ -14,6 +15,8 @@ type WorkExperienceItem = {
   company: string;
   duration: string;
   description: string;
+  image?: string;
+  isVoluntary?: boolean;
 };
 
 type EducationItem = {
@@ -22,6 +25,7 @@ type EducationItem = {
   duration: string;
   gpa?: string;
   description: string;
+  image?: string;
 };
 
 type TimelineItem = WorkExperienceItem | EducationItem;
@@ -33,7 +37,7 @@ const ExperienceSection = () => {
     offset: ["start end", "end start"],
   });
   
-  const [activeTab, setActiveTab] = useState<"work" | "education">("education");
+  const [activeTab, setActiveTab] = useState<"work" | "education">("work");
   const [expandedItem, setExpandedItem] = useState<number | null>(null);
   
   const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0.4, 1, 1, 0.4]);
@@ -58,6 +62,8 @@ const ExperienceSection = () => {
     // Make education items and specifically Student Tutor non-expandable
     const isStudentTutor = isWork && (item as WorkExperienceItem).title === "Student Tutor";
     const isExpandable = isWork && !isStudentTutor;
+    const isVoluntary = isWork && (item as WorkExperienceItem).isVoluntary;
+    const itemImage = (item as WorkExperienceItem).image || (item as EducationItem).image;
     
     return (
       <motion.div
@@ -87,14 +93,34 @@ const ExperienceSection = () => {
         <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 via-transparent to-purple-500/10 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
         
         <div className="flex flex-col md:flex-row gap-4 items-start">
-          <div className={`bg-gradient-to-br ${isWork ? 'from-blue-600 to-blue-400' : 'from-purple-600 to-purple-400'} p-3 rounded-xl text-white shadow-lg`}>
-            {isWork ? <HiOutlineBriefcase className="text-2xl" /> : <HiOutlineAcademicCap className="text-2xl" />}
-          </div>
+          {/* Logo / Icon */}
+          {itemImage ? (
+            <div className="flex-shrink-0 w-14 h-14 rounded-xl overflow-hidden bg-white flex items-center justify-center shadow-lg border border-gray-600/30">
+              <Image
+                src={itemImage}
+                alt={isWork ? (item as WorkExperienceItem).company : (item as EducationItem).institution}
+                width={56}
+                height={56}
+                className="w-full h-full object-contain p-1"
+              />
+            </div>
+          ) : (
+            <div className={`bg-gradient-to-br ${isWork ? 'from-blue-600 to-blue-400' : 'from-purple-600 to-purple-400'} p-3 rounded-xl text-white shadow-lg`}>
+              {isWork ? <HiOutlineBriefcase className="text-2xl" /> : <HiOutlineAcademicCap className="text-2xl" />}
+            </div>
+          )}
           
           <div className="flex-1">
-            <h4 className="text-xl md:text-2xl font-bold text-white group-hover:text-blue-400 transition-colors">
-              {isWork ? (item as WorkExperienceItem).title : (item as EducationItem).degree}
-            </h4>
+            <div className="flex flex-wrap items-center gap-2 mb-1">
+              <h4 className="text-xl md:text-2xl font-bold text-white group-hover:text-blue-400 transition-colors">
+                {isWork ? (item as WorkExperienceItem).title : (item as EducationItem).degree}
+              </h4>
+              {isVoluntary && (
+                <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
+                  ✦ Voluntary
+                </span>
+              )}
+            </div>
             <p className="text-blue-400 font-medium mb-1">
               {isWork ? (item as WorkExperienceItem).company : (item as EducationItem).institution}
             </p>
@@ -128,7 +154,7 @@ const ExperienceSection = () => {
         </div>
         
         {isExpandable && !isExpanded && (
-          <div className="absolute bottom-4 right-4 md:bottom-6 md:right-6 text-sm text-blue-400 flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+          <div className="absolute bottom-4 right-4 md:bottom-6 md:right-6 text-sm text-blue-400 flex items-center gap-1 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity">
             <span>Read more</span>
             <RiArrowRightLine />
           </div>
